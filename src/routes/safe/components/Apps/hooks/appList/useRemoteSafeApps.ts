@@ -44,7 +44,7 @@ const useRemoteSafeApps = (): ReturnType => {
       } catch (e) {
         setStatus(FETCH_STATUS.ERROR)
         logError(Errors._902, e.message)
-        dispatch(enqueueSnackbar(NOTIFICATIONS.SAFE_APPS_FETCH_ERROR_MSG))
+        // dispatch(enqueueSnackbar(NOTIFICATIONS.SAFE_APPS_FETCH_ERROR_MSG))
       }
     }
 

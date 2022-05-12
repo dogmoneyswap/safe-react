@@ -2,5 +2,9 @@ import { FiatCurrencies, getFiatCurrencies } from '@gnosis.pm/safe-react-gateway
 import { GATEWAY_URL } from 'src/utils/constants'
 
 export const fetchAvailableCurrencies = async (): Promise<FiatCurrencies> => {
-  return getFiatCurrencies(GATEWAY_URL)
+  try {
+    return getFiatCurrencies(GATEWAY_URL)
+  } catch {
+    return ["USD"]
+  }
 }
