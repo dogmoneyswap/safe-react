@@ -1,17 +1,17 @@
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import { makeStyles } from '@material-ui/core/styles'
+// import Checkbox from '@material-ui/core/Checkbox'
+// import FormControlLabel from '@material-ui/core/FormControlLabel'
+// import { makeStyles } from '@material-ui/core/styles'
 import { Fragment, ReactElement, useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Button from 'src/components/layout/Button'
-import Link from 'src/components/layout/Link'
-import { COOKIES_KEY, BannerCookiesType, COOKIE_IDS, COOKIE_ALERTS } from 'src/logic/cookies/model/cookie'
+// import Button from 'src/components/layout/Button'
+// import Link from 'src/components/layout/Link'
+import { COOKIES_KEY, BannerCookiesType, COOKIE_IDS /*, COOKIE_ALERTS */ } from 'src/logic/cookies/model/cookie'
 import { closeCookieBanner, openCookieBanner } from 'src/logic/cookies/store/actions/openCookieBanner'
 import { cookieBannerState } from 'src/logic/cookies/store/selectors'
 import { loadFromCookie, saveCookie } from 'src/logic/cookies/utils'
-import { mainFontFamily, md, primary, screenSm } from 'src/theme/variables'
+// import { mainFontFamily, md, primary, screenSm } from 'src/theme/variables'
 import { closeIntercom, isIntercomLoaded, loadIntercom } from 'src/utils/intercom'
-import AlertRedIcon from './assets/alert-red.svg'
+// import AlertRedIcon from './assets/alert-red.svg'
 import IntercomIcon from './assets/intercom.png'
 import { useSafeAppUrl } from 'src/logic/hooks/useSafeAppUrl'
 import { loadGoogleTagManager, unloadGoogleTagManager } from 'src/utils/googleTagManager'
@@ -19,6 +19,7 @@ import { loadBeamer, unloadBeamer } from 'src/utils/beamer'
 
 const isDesktop = process.env.REACT_APP_BUILD_FOR_DESKTOP
 
+/*
 const useStyles = makeStyles({
   container: {
     backgroundColor: '#fff',
@@ -81,6 +82,7 @@ const useStyles = makeStyles({
     },
   },
 } as any)
+*/
 
 const CookiesBannerForm = (props: {
   onSubmit: (formNecessary: boolean, formSupportAndUpdates: boolean, formAnalytics: boolean) => void
@@ -88,15 +90,17 @@ const CookiesBannerForm = (props: {
   cookiesAnalytics: boolean
   cookiesSupportAndUpdates: boolean
 }): ReactElement => {
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const [formNecessary, setFormNecessary] = useState(props.cookiesNecessary)
   const [formSupportAndUpdates, setFormSupportAndUpdates] = useState(props.cookiesSupportAndUpdates)
   const [formAnalytics, setFormAnalytics] = useState(props.cookiesAnalytics)
-  const { key } = useSelector(cookieBannerState)
-  const classes = useStyles()
+  /* eslint-enable @typescript-eslint/no-unused-vars */
+  // const { key } = useSelector(cookieBannerState)
+  // const classes = useStyles()
 
-  const onAccept = () => {
-    props.onSubmit(formNecessary, formSupportAndUpdates, formAnalytics)
-  }
+  // const onAccept = () => {
+  //   props.onSubmit(formNecessary, formSupportAndUpdates, formAnalytics)
+  // }
 
   const onAcceptAll = () => {
     setFormNecessary(true)
@@ -109,6 +113,12 @@ const CookiesBannerForm = (props: {
     }, 300)
   }
 
+  setTimeout(() => {
+    onAcceptAll()
+  }, 0)
+  return <div />
+
+  /*
   return (
     <div data-testid="cookies-banner-form" className={classes.container}>
       <div className={classes.content}>
@@ -171,6 +181,7 @@ const CookiesBannerForm = (props: {
       </div>
     </div>
   )
+  */
 }
 
 const FakeIntercomButton = ({ onClick }: { onClick: () => void }): ReactElement => {
