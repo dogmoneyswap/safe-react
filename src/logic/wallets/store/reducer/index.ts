@@ -9,6 +9,7 @@ export type ProvidersState = {
   account: string
   available: boolean
   ensDomain: string
+  ensAvatar: string
   loaded: boolean
 }
 
@@ -16,6 +17,7 @@ export type ProviderNamePayload = ProvidersState['name']
 export type ProviderNetworkPayload = ProvidersState['network']
 export type ProviderAccountPayload = ProvidersState['account']
 export type ProviderEnsPayload = ProvidersState['ensDomain']
+export type ProviderEnsAvatarPayload = ProvidersState['ensAvatar']
 
 export type ProviderPayloads =
   | ProviderNamePayload
@@ -28,6 +30,7 @@ const initialProviderState: ProvidersState = {
   account: '',
   network: '',
   ensDomain: '',
+  ensAvatar: '',
   available: false,
   loaded: false,
 }
@@ -64,6 +67,11 @@ const providerReducer = handleActions<ProvidersState, ProviderPayloads>(
       providerFactory({
         ...state,
         ensDomain: payload,
+      }),
+    [PROVIDER_ACTIONS.ENS_AVATAR]: (state: ProvidersState, { payload }: Action<ProviderEnsAvatarPayload>) =>
+      providerFactory({
+        ...state,
+        ensAvatar: payload,
       }),
   },
   initialProviderState,

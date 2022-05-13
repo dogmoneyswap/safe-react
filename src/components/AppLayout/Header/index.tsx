@@ -13,6 +13,7 @@ import {
   providerNameSelector,
   userAccountSelector,
   userEnsSelector,
+  userEnsAvatarSelector
 } from 'src/logic/wallets/store/selectors'
 import onboard, { loadLastUsedProvider } from 'src/logic/wallets/onboard'
 import { isSupportedWallet } from 'src/logic/wallets/utils/walletList'
@@ -28,6 +29,7 @@ const HeaderComponent = (): React.ReactElement => {
   const chainId = useSelector(currentChainId)
   const userAddress = useSelector(userAccountSelector)
   const ensName = useSelector(userEnsSelector)
+  const ensAvatar = useSelector(userEnsAvatarSelector)
   const loaded = useSelector(loadedSelector)
   const available = useSelector(availableSelector)
 
@@ -73,6 +75,7 @@ const HeaderComponent = (): React.ReactElement => {
         provider={provider}
         userAddress={userAddress}
         ensName={ensName}
+        ensAvatar={ensAvatar}
       />
     )
   }

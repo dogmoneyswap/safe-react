@@ -15,6 +15,10 @@ export const userEnsSelector = createSelector(providerSelector, ({ ensDomain }: 
   return ensDomain
 })
 
+export const userEnsAvatarSelector = createSelector(providerSelector, ({ ensAvatar }: ProvidersState): string => {
+  return ensAvatar
+})
+
 export const providerNameSelector = createSelector(providerSelector, ({ name }: ProvidersState): string | undefined => {
   return name
 })

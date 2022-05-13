@@ -103,6 +103,7 @@ type Props = {
   provider?: string
   userAddress: string
   ensName: string
+  ensAvatar: string
 }
 
 const useStyles = makeStyles(styles)
@@ -114,6 +115,7 @@ export const UserDetails = ({
   provider,
   userAddress,
   ensName,
+  ensAvatar
 }: Props): React.ReactElement => {
   const connectedNetwork = useSelector(networkSelector)
   const classes = useStyles()
@@ -123,7 +125,15 @@ export const UserDetails = ({
       <Block className={classes.container}>
         <Row align="center" className={classes.identicon} margin="md">
           {connected ? (
-            <Identicon address={userAddress || 'random'} size="xxl" />
+            ensAvatar ? (
+              <Img
+                alt="ENS Avatar"
+                height={60}
+                src={ensAvatar}
+              />
+            ) : (
+              <Identicon address={userAddress || 'random'} size="xxl" />
+            )
           ) : (
             <KeyRing circleSize={75} dotRight={25} dotSize={25} dotTop={50} hideDot keySize={30} mode="warning" />
           )}

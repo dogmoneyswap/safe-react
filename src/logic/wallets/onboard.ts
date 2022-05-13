@@ -12,7 +12,7 @@ import { store } from 'src/store'
 import updateProviderWallet from 'src/logic/wallets/store/actions/updateProviderWallet'
 import updateProviderAccount from 'src/logic/wallets/store/actions/updateProviderAccount'
 import updateProviderNetwork from 'src/logic/wallets/store/actions/updateProviderNetwork'
-import updateProviderEns from 'src/logic/wallets/store/actions/updateProviderEns'
+import { updateProviderEns, updateProviderEnsAvatar } from 'src/logic/wallets/store/actions/updateProviderEns'
 import closeSnackbar from 'src/logic/notifications/store/actions/closeSnackbar'
 import { getChains } from 'src/config/cache/chains'
 import { shouldSwitchNetwork, switchNetwork } from 'src/logic/wallets/utils/network'
@@ -99,6 +99,7 @@ const getOnboard = (chainId: ChainId): API => {
       ens: hasENSSupport(chainId)
         ? (ens) => {
             store.dispatch(updateProviderEns(ens?.name || ''))
+            store.dispatch(updateProviderEnsAvatar(ens?.avatar || ''))
           }
         : undefined,
     },
