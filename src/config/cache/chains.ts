@@ -9,7 +9,13 @@ export const getChains = (): ChainInfo[] => chains
 
 export const loadChains = async () => {
   const { results = [] } = await getChainsConfig(GATEWAY_URL)
-  chains = results
+  const res = results.map(val => {
+    if (val.chainId === "10000" || val.chainId === "10001") {
+      val.nativeCurrency.logoUri = "https://www.marketcap.cash/bch.svg"
+    }
+    return val
+  })
+  chains = res
   // Set the initail web3 provider after loading chains
   setWeb3ReadOnly()
 }
