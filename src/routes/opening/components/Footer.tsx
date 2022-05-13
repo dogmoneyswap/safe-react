@@ -27,7 +27,7 @@ const LoaderText = styled.span`
 export const GenericFooter = (): ReactElement => {
   return (
     <Paragraph size="lg" color="primary">
-      This process should take a couple of minutes.
+      This process should take a couple of seconds.
     </Paragraph>
   )
 }
