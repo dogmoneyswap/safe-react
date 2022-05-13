@@ -91,7 +91,8 @@ export const calculateGasOf = async (txConfig: EthAdapterTransaction): Promise<n
   try {
     const ethAdapter = getSDKWeb3ReadOnly()
 
-    return await ethAdapter.estimateGas(txConfig)
+    // gas limit estimation for safe transactions seems to be off on smartbch
+    return (await ethAdapter.estimateGas(txConfig)) * 2
   } catch (err) {
     throw new CodedException(Errors._612, err.message)
   }
