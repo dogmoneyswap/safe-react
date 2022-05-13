@@ -24,3 +24,37 @@ index 92a3dc6..3c877f2 100644
    });
    wallet = writable({
      name: null,
+diff --git a/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js b/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
+index de97415c..62daa1b5 100644
+--- a/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
++++ b/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
+@@ -1331,9 +1331,11 @@ function _getEns() {
+             _yield$Promise = _context13.sent;
+             ENS = _yield$Promise["default"];
+             getEnsAddress = _yield$Promise.getEnsAddress;
++            const ensAddress = parseInt(networkId) === 10000 ? "0xCfb86556760d03942EBf1ba88a9870e67D77b627" :
++              parseInt(networkId) === 10001 ? "0x32f1FBE59D771bdB7FB247FE97A635f50659202b" : getEnsAddress(networkId)
+             ens = new ENS({
+               provider: provider,
+-              ensAddress: getEnsAddress(networkId)
++              ensAddress: ensAddress
+             });
+             _context13.next = 10;
+             return ens.getName(address);
+diff --git a/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js b/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
+index 3c877f29..95c27fce 100644
+--- a/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
++++ b/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
+@@ -1297,9 +1297,11 @@ function _getEns() {
+             _yield$import = _context13.sent;
+             ENS = _yield$import["default"];
+             getEnsAddress = _yield$import.getEnsAddress;
++            const ensAddress = parseInt(networkId) === 10000 ? "0xCfb86556760d03942EBf1ba88a9870e67D77b627" :
++              parseInt(networkId) === 10001 ? "0x32f1FBE59D771bdB7FB247FE97A635f50659202b" : getEnsAddress(networkId)
+             ens = new ENS({
+               provider: provider,
+-              ensAddress: getEnsAddress(networkId)
++              ensAddress: ensAddress
+             });
+             _context13.next = 10;
+             return ens.getName(address);
