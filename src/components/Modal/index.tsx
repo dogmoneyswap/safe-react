@@ -25,7 +25,7 @@ const ModalStyled = styled(ModalMUI)`
   .paper {
     position: relative;
     top: 68px;
-    width: 500px;
+    width: 550px;
     border-radius: 8px;
     background-color: #ffffff;
     box-shadow: 1px 2px 10px 0 rgba(40, 54, 61, 0.18);
