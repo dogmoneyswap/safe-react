@@ -125,6 +125,7 @@ describe('TxSender', () => {
       available: true,
       loaded: true,
       ensDomain: '',
+      ensAvatar: '',
     }))
     jest.spyOn(safeContracts, 'getGnosisSafeInstanceAt')
     jest.spyOn(notificationBuilder, 'createTxNotifications')
