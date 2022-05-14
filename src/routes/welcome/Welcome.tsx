@@ -17,7 +17,9 @@ function Welcome(): ReactElement {
         <Title size="md" strong>
           Welcome to Smart Safe Multisig.
         </Title>
-        <Title size="xs">Here is how to get started:</Title>
+        <Title size="xs">
+          Smart Safe is based on <a href="https://gnosis-safe.io/">Gnosis Safe</a>. Here is how to get started:
+        </Title>
         <CardsContainer>
           <StyledCard>
             {/* Create Safe */}
