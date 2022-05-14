@@ -115,7 +115,7 @@ export const UserDetails = ({
   provider,
   userAddress,
   ensName,
-  ensAvatar
+  ensAvatar,
 }: Props): React.ReactElement => {
   const connectedNetwork = useSelector(networkSelector)
   const classes = useStyles()
@@ -126,11 +126,7 @@ export const UserDetails = ({
         <Row align="center" className={classes.identicon} margin="md">
           {connected ? (
             ensAvatar ? (
-              <Img
-                alt="ENS Avatar"
-                height={60}
-                src={ensAvatar}
-              />
+              <Img alt="ENS Avatar" height={60} src={ensAvatar} />
             ) : (
               <Identicon address={userAddress || 'random'} size="xxl" />
             )

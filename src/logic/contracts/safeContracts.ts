@@ -64,8 +64,7 @@ const getSafeContractDeployment = ({ safeVersion }: { safeVersion: string }) => 
  */
 const getGnosisSafeContractInstance = (web3: Web3, chainId: ChainId): GnosisSafe => {
   const safeSingletonDeployment = getSafeContractDeployment({ safeVersion: LATEST_SAFE_VERSION })
-  const contractAddress =
-    safeSingletonDeployment?.networkAddresses[chainId]
+  const contractAddress = safeSingletonDeployment?.networkAddresses[chainId]
 
   if (!contractAddress) {
     throw new Error(`GnosisSafe contract not found for chainId: ${chainId}`)
@@ -89,8 +88,7 @@ const getProxyFactoryContractInstance = (web3: Web3, chainId: ChainId): ProxyFac
     getProxyFactoryDeployment({
       version: LATEST_SAFE_VERSION,
     })
-  const contractAddress =
-    proxyFactoryDeployment?.networkAddresses[chainId]
+  const contractAddress = proxyFactoryDeployment?.networkAddresses[chainId]
 
   if (!contractAddress) {
     throw new Error(`GnosisSafeProxyFactory contract not found for chainId: ${chainId}`)
@@ -113,8 +111,7 @@ const getFallbackHandlerContractInstance = (web3: Web3, chainId: ChainId): Compa
     getFallbackHandlerDeployment({
       version: LATEST_SAFE_VERSION,
     })
-  const contractAddress =
-    fallbackHandlerDeployment?.networkAddresses[chainId]
+  const contractAddress = fallbackHandlerDeployment?.networkAddresses[chainId]
 
   if (!contractAddress) {
     throw new Error(`FallbackHandler contract not found for chainId: ${chainId}`)

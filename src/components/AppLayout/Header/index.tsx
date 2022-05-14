@@ -13,7 +13,7 @@ import {
   providerNameSelector,
   userAccountSelector,
   userEnsSelector,
-  userEnsAvatarSelector
+  userEnsAvatarSelector,
 } from 'src/logic/wallets/store/selectors'
 import onboard, { loadLastUsedProvider } from 'src/logic/wallets/onboard'
 import { isSupportedWallet } from 'src/logic/wallets/utils/walletList'

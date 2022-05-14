@@ -80,8 +80,7 @@ const generateBatchRequests = <ReturnValues>({
   // in the outside function where the batch object is created.
   !batch && localBatch.execute()
 
-  // @ts-ignore
-  return Promise.all([context, ...values])
+  return Promise.all([context, ...values]) as any
 }
 
 export default generateBatchRequests
