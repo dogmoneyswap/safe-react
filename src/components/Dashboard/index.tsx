@@ -5,7 +5,7 @@ import PendingTxsList from './PendingTxs/PendingTxsList'
 import Overview from './Overview/Overview'
 import SafeApps from './SafeApps'
 import { FeaturedApps } from './FeaturedApps/FeaturedApps'
-import MobileAppBanner from './MobileAppBanner'
+// import MobileAppBanner from './MobileAppBanner'
 import { DashboardTitle } from './styled'
 
 const Dashboard = (): ReactElement => {
@@ -17,7 +17,9 @@ const Dashboard = (): ReactElement => {
         <Overview />
       </Grid>
 
+      {/*
       <MobileAppBanner />
+      */}
 
       <Grid item xs={12} md={6}>
         <PendingTxsList size={4} />
