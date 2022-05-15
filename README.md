@@ -1,16 +1,12 @@
-# Gnosis Safe
+# Smart Safe
 
-![license](https://img.shields.io/github/license/gnosis/safe-react)
-![build](https://img.shields.io/github/workflow/status/gnosis/safe-react/Deploy%20to%20Mainnet%20network/main)
-![tests](https://img.shields.io/github/workflow/status/gnosis/safe-react/Unit%20tests%20&%20coverage/main?label=tests)
-![coverage](https://coveralls.io/repos/github/gnosis/safe-react/badge.svg?branch=main)
-![release](https://img.shields.io/github/v/release/gnosis/safe-react)
+![license](https://img.shields.io/github/license/mistswapdex/safe-react)
 
-The most trusted platform to store digital assets on Ethereum. More info at [gnosis-safe.io](https://gnosis-safe.io/)
+The most trusted platform to store digital assets on smartBCH. More info at [smartsafe.cash](https://smartsafe.cash/). Built on top of [Gnosis Safe](https://gnosis-safe.io).
 
 For technical information please refer to the [Gnosis Developer Portal](https://docs.gnosis.io/safe/).
 
-For support requests, please open up a [bug issue](https://github.com/gnosis/safe-react/issues/new?template=bug-report.md) or reach out via [Discord](https://chat.gnosis-safe.io).
+For support requests, please open up a [bug issue](https://github.com/mistswapdex/safe-react/issues/new?template=bug-report.md) or reach out via [Discord](https://discord.gg/mistswapdex).
 
 ## Transactions
 
@@ -24,10 +20,7 @@ Please see the [transaction](docs/transactions.md) notes for more information ab
 
 ## Deployed environments
 
-- Production: https://gnosis-safe.io/app/
-- Staging: https://safe-team.staging.gnosisdev.com/app/
-- Dev: https://safe-team.dev.gnosisdev.com/app/
-- PRs: `https://pr<PR_NUMBER>--safereact.review-safe.gnosisdev.com/app/`
+- Production: https://smartsafe.cash | https://safe.mistswap.fi
 
 ## Getting Started
 
@@ -44,12 +37,6 @@ The app grabs environment variables from the `.env` file. Copy our template to y
 
 ```
 cp .env.example .env
-```
-
-To execute transactions, you'll need to create an [Infura](https://infura.io) project and set the project ID in the `.env` you've just created:
-
-```
-REACT_APP_INFURA_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
 Once done, you'll need to restart the app if it's already running.
@@ -116,8 +103,6 @@ yarn lint:fix
 
 The code is deployed to a testing website automatically on each push via a GitHub Action.
 The GitHub Action will create a new subdomain and post the link as a comment in the PR.
-
-When pushing to the `main` branch, the code will be automatically deployed to [staging](https://safe-team.staging.gnosisdev.com/).
 
 ### Production
 
