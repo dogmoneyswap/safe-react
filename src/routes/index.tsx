@@ -1,6 +1,7 @@
 import React from 'react'
 import { Loader } from '@gnosis.pm/safe-react-components'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 
 import { LoadingContainer } from 'src/components/LoaderContainer'
@@ -19,7 +20,8 @@ import {
 } from './routes'
 import { setChainId } from 'src/logic/config/utils'
 import { setChainIdFromUrl } from 'src/utils/history'
-import { usePageTracking } from 'src/utils/googleTagManager'
+import { /*usePageTracking,*/ getAnonymizedLocation } from 'src/utils/googleTagManager'
+import * as gtag from './../utils/matomo'
 import useSafeAddress from 'src/logic/currentSession/hooks/useSafeAddress'
 
 const Welcome = React.lazy(() => import('./welcome/Welcome'))
@@ -33,8 +35,11 @@ const Routes = (): React.ReactElement => {
   const lastSafe = useSelector(lastViewedSafe)
   const { shortName, safeAddress } = useSafeAddress()
 
+  useEffect(() => {
+    gtag.pageview(getAnonymizedLocation(location))
+  })
   // Google Tag Manager page tracking
-  usePageTracking()
+  // usePageTracking()
 
   return (
     <Switch>
