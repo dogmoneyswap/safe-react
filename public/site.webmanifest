@@ -1,0 +1,14 @@
+{
+    "name": "Smart Safe",
+    "short_name": "Smart Safe",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#536c45",
+    "background_color": "#536c45",
+    "display": "standalone"
+}
