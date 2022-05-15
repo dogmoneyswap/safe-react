@@ -63,12 +63,8 @@ const Footer = (): React.ReactElement => {
         </Link>
       </span>
       <span className={classes.sep}>|</span>
-      <Link
-        className={cn(classes.item, classes.link)}
-        target="_blank"
-        to="https://github.com/mistswapdex/safe-react/releases"
-      >
-        {appVersion} + SmartBch Patches
+      <Link className={cn(classes.item, classes.link)} target="_blank" to="https://github.com/mistswapdex/safe-react">
+        {appVersion} + SmartBCH Patches
       </Link>
     </footer>
   )
