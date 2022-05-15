@@ -126,7 +126,7 @@ export const UserDetails = ({
         <Row align="center" className={classes.identicon} margin="md">
           {connected ? (
             ensAvatar ? (
-              <Img alt="ENS Avatar" height={60} src={ensAvatar} />
+              <Img alt="LNS Avatar" height={60} src={ensAvatar} />
             ) : (
               <Identicon address={userAddress || 'random'} size="xxl" />
             )
