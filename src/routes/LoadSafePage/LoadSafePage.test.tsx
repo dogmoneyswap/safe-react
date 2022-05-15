@@ -208,7 +208,7 @@ describe('<LoadSafePage>', () => {
 
       expect(mockedEndpoints.getSafeInfo).toBeCalledTimes(0)
 
-      const errorText = 'Must be a valid address, ENS or Unstoppable domain'
+      const errorText = 'Must be a valid address or LNS Name'
 
       expect(screen.getByText(errorText)).toBeInTheDocument()
     })
@@ -291,7 +291,7 @@ describe('<LoadSafePage>', () => {
 
       expect(safeAddressInputNode.value).toBe(notExistingENSNameDomain)
       expect(mockedEndpoints.getSafeInfo).not.toHaveBeenCalled()
-      const errorTextNode = screen.getByText('Must be a valid address, ENS or Unstoppable domain')
+      const errorTextNode = screen.getByText('Must be a valid address or LNS Name')
 
       expect(errorTextNode).toBeInTheDocument()
       getENSAddressSpy.mockClear()

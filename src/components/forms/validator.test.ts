@@ -163,7 +163,7 @@ describe('Forms > Validators', () => {
   })
 
   describe('mustBeEthereumAddress validator', () => {
-    const MUST_BE_ETH_ADDRESS_OR_DOMAIN_ERR_MSG = 'Must be a valid address, ENS or Unstoppable domain'
+    const MUST_BE_ETH_ADDRESS_OR_DOMAIN_ERR_MSG = 'Must be a valid address or LNS Name'
 
     it('Returns undefined for a valid ethereum address', async () => {
       expect(await mustBeEthereumAddress('0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe')).toBeUndefined()

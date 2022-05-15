@@ -68,7 +68,7 @@ const Footer = (): React.ReactElement => {
         target="_blank"
         to="https://github.com/mistswapdex/safe-react/releases"
       >
-        {appVersion}
+        {appVersion} + SmartBch Patches
       </Link>
     </footer>
   )
