@@ -142,6 +142,13 @@ export const reverseENSLookup = async (address: string): Promise<string> => {
 }
 
 export const getContentFromENS = (name: string): Promise<ContentHash> => web3.eth.ens.getContenthash(name)
+export const getAvatarFromENS = (name: string): string => {
+  const LNS_METADATA_URL = {
+    10000: 'https://metadata.bch.domains/smartbch',
+    10001: 'https://metadata.bch.domains/smartbch-amber',
+  }
+  return name?.length ? `${LNS_METADATA_URL[parseInt(_getChainId())]}/avatar/${name}` : ''
+}
 
 export const isTxPendingError = (err: Error): boolean => {
   const WEB3_TX_NOT_MINED_ERROR = 'Transaction was not mined within'
