@@ -1,31 +1,5 @@
 diff --git a/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js b/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
-index df8c3c3..de97415 100644
---- a/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
-+++ b/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
-@@ -2536,7 +2536,7 @@ function initializeStores() {
-   balance = get_store_value(app).dappId ? createBalanceStore(null) : createWalletStateSliceStore({
-     parameter: 'balance',
-     initialState: null,
--    intervalSetting: 1000
-+    intervalSetting: 1000 * 60 * 60
-   });
-   wallet = writable({
-     name: null,
-diff --git a/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js b/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
-index 92a3dc6..3c877f2 100644
---- a/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
-+++ b/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
-@@ -2502,7 +2502,7 @@ function initializeStores() {
-   balance = get_store_value(app).dappId ? createBalanceStore(null) : createWalletStateSliceStore({
-     parameter: 'balance',
-     initialState: null,
--    intervalSetting: 1000
-+    intervalSetting: 1000 * 60 * 60
-   });
-   wallet = writable({
-     name: null,
-diff --git a/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js b/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
-index de97415c..62daa1b5 100644
+index df8c3c3c..62daa1b5 100644
 --- a/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
 +++ b/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
 @@ -1331,9 +1331,11 @@ function _getEns() {
@@ -41,8 +15,17 @@ index de97415c..62daa1b5 100644
              });
              _context13.next = 10;
              return ens.getName(address);
+@@ -2536,7 +2538,7 @@ function initializeStores() {
+   balance = get_store_value(app).dappId ? createBalanceStore(null) : createWalletStateSliceStore({
+     parameter: 'balance',
+     initialState: null,
+-    intervalSetting: 1000
++    intervalSetting: 1000 * 60 * 60
+   });
+   wallet = writable({
+     name: null,
 diff --git a/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js b/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
-index 3c877f29..95c27fce 100644
+index 92a3dc65..95c27fce 100644
 --- a/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
 +++ b/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
 @@ -1297,9 +1297,11 @@ function _getEns() {
@@ -58,3 +41,12 @@ index 3c877f29..95c27fce 100644
              });
              _context13.next = 10;
              return ens.getName(address);
+@@ -2502,7 +2504,7 @@ function initializeStores() {
+   balance = get_store_value(app).dappId ? createBalanceStore(null) : createWalletStateSliceStore({
+     parameter: 'balance',
+     initialState: null,
+-    intervalSetting: 1000
++    intervalSetting: 1000 * 60 * 60
+   });
+   wallet = writable({
+     name: null,

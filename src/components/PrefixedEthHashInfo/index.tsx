@@ -17,8 +17,6 @@ const PrefixedEthHashInfo = ({ hash, customAvatar, customAvatarFallback, name, .
   const [ensName] = useEnsName(address)
   const ensAvatar = getAvatarFromENS(ensName)
 
-  console.log(customAvatar || ensAvatar || undefined)
-
   return (
     <EthHashInfo
       hash={address}
