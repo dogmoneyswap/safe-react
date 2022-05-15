@@ -56,14 +56,16 @@ const Footer = (): React.ReactElement => {
 
   return (
     <footer className={classes.footer}>
-      <span className={classes.item}>©{date.getFullYear()} MistSwap</span>
+      <Link className={cn(classes.item, classes.link)} target="_blank" to="https://mistswap.fi">
+        ©{date.getFullYear()} MistSwap
+      </Link>
       <span className={classes.sep}>|</span>
       <Link
         className={cn(classes.item, classes.link)}
         target="_blank"
         to="https://github.com/mistswapdex/safe-react/releases"
       >
-        {appVersion}
+        {appVersion} + SmartBch Patches
       </Link>
     </footer>
   )
