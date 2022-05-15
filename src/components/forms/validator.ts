@@ -84,7 +84,7 @@ const mustHaveValidPrefix = (prefix: string): ValidatorReturnType => {
 }
 
 export const mustBeEthereumAddress = (fullAddress: string): ValidatorReturnType => {
-  const errorMessage = 'Must be a valid address, ENS or Unstoppable domain'
+  const errorMessage = 'Must be a valid address or LNS Name'
   const { address, prefix } = parsePrefixedAddress(fullAddress)
 
   const prefixError = mustHaveValidPrefix(prefix)

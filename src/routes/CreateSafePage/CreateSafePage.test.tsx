@@ -456,7 +456,7 @@ describe('<CreateSafePage>', () => {
       const defaultOwnerInput = screen.getByTestId('owner-address-0')
       fireEvent.change(defaultOwnerInput, { target: { value: notExistingENSNameDomain } })
 
-      const errorTextNode = screen.getByText('Must be a valid address, ENS or Unstoppable domain')
+      const errorTextNode = screen.getByText('Must be a valid address or LNS Name')
 
       expect(errorTextNode).toBeInTheDocument()
       getENSAddressSpy.mockClear()

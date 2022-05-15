@@ -7,7 +7,7 @@ import AddressInput from '.'
 const fieldName = 'test-field'
 const fieldTestId = 'test-field-id'
 const invalidNetworkPrefixErrorMessage = 'The chain prefix must match the current network'
-const invalidAddressErrorMessage = 'Must be a valid address, ENS or Unstoppable domain'
+const invalidAddressErrorMessage = 'Must be a valid address or LNS Name'
 const unsupportedPrefixError = 'Wrong chain prefix'
 
 const getENSAddressSpy = jest.spyOn(web3, 'getAddressFromDomain')
