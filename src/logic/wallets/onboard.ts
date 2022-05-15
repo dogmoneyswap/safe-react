@@ -104,7 +104,7 @@ const getOnboard = (chainId: ChainId): API => {
         : undefined,
     },
     walletSelect: {
-      description: 'Please select a wallet to connect to Gnosis Safe',
+      description: 'Please select a wallet to connect to Smart Safe',
       wallets: isCypressAskingForConnectedState() ? [customSDKWallet] : getSupportedWallets(chainId),
     },
     walletCheck: [

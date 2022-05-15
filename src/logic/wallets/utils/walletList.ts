@@ -33,9 +33,9 @@ const wallets = (chainId: ChainId): Wallet[] => {
     },
     {
       walletName: WALLETS.TREZOR,
-      appUrl: 'gnosis-safe.io',
+      appUrl: 'smartsafe.cash',
       preferred: true,
-      email: 'safe@gnosis.io',
+      email: 'hello@smartsafe.cash',
       desktop: true,
       rpcUrl,
     },
@@ -50,13 +50,13 @@ const wallets = (chainId: ChainId): Wallet[] => {
       walletName: WALLETS.KEYSTONE,
       desktop: false,
       rpcUrl,
-      appName: 'Gnosis Safe',
+      appName: 'Smart Safe',
     },
     { walletName: WALLETS.TRUST, preferred: true, desktop: false },
     {
       walletName: WALLETS.LATTICE,
       rpcUrl,
-      appName: 'Gnosis Safe',
+      appName: 'Smart Safe',
       desktop: false,
     },
     {
