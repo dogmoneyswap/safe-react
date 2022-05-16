@@ -9,6 +9,7 @@ import { border, xs } from 'src/theme/variables'
 import Block from 'src/components/layout/Block'
 import Row from 'src/components/layout/Row'
 import PrefixedEthHashInfo from 'src/components/PrefixedEthHashInfo'
+import { isMobile } from 'react-device-detect'
 
 const StyledBlock = styled(Block)`
   font-size: 12px;
@@ -46,6 +47,7 @@ const SafeInfo = ({ text }: SafeInfoProps): React.ReactElement => {
         explorerUrl={getExplorerInfo(safeAddress)}
         showAvatar
         showCopyBtn
+        shortenHash={isMobile ? 12 : undefined}
       />
       {ethBalance && (
         <StyledBlock>

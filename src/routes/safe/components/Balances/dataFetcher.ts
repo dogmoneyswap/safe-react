@@ -5,6 +5,7 @@ import { Token } from 'src/logic/tokens/store/model/token'
 export const BALANCE_TABLE_ASSET_ID = 'asset'
 export const BALANCE_TABLE_BALANCE_ID = 'balance'
 export const BALANCE_TABLE_VALUE_ID = 'value'
+export const BALANCE_TABLE_MOBILE_ID = 'mobile'
 export interface BalanceData {
   asset: { name: string; logoUri: string; address: string; symbol: string }
   assetOrder: string
@@ -75,4 +76,16 @@ export const generateColumns = (): List<TableColumn> => {
   }
 
   return List([assetColumn, balanceColumn, value, actions])
+}
+
+export const generateMobileColumns = (): List<TableColumn> => {
+  const mobileColumn: TableColumn = {
+    id: BALANCE_TABLE_MOBILE_ID,
+    order: false,
+    disablePadding: false,
+    label: 'Mobile',
+    custom: false,
+  }
+
+  return List([mobileColumn])
 }

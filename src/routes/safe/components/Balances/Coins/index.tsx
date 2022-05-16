@@ -24,6 +24,8 @@ import {
   generateColumns,
   getBalanceData,
   BalanceData,
+  generateMobileColumns,
+  BALANCE_TABLE_MOBILE_ID,
 } from 'src/routes/safe/components/Balances/dataFetcher'
 import { extendedSafeTokensSelector, grantedSelector } from 'src/routes/safe/container/selector'
 import { makeStyles } from '@material-ui/core/styles'
@@ -32,6 +34,8 @@ import { currentCurrencySelector } from 'src/logic/currencyValues/store/selector
 import { trackEvent } from 'src/utils/googleTagManager'
 import { ASSETS_EVENTS } from 'src/utils/events/assets'
 import Track from 'src/components/Track'
+import { isMobile } from 'react-device-detect'
+import Col from 'src/components/layout/Col'
 
 const StyledButton = styled(Button)`
   &&.MuiButton-root {
@@ -76,7 +80,7 @@ const CurrencyTooltip = (props: CurrencyTooltipProps): React.ReactElement | null
 const Coins = (props: Props): React.ReactElement => {
   const { showReceiveFunds, showSendFunds } = props
   const classes = useStyles()
-  const columns = generateColumns()
+  const columns = isMobile ? generateMobileColumns() : generateColumns()
   const autoColumns = columns.filter((c) => !c.custom)
   const selectedCurrency = useSelector(currentCurrencySelector)
   const safeTokens = useSelector(extendedSafeTokensSelector)
@@ -132,6 +136,70 @@ const Coins = (props: Props): React.ReactElement => {
                       )
                     break
                   }
+                  case BALANCE_TABLE_MOBILE_ID: {
+                    const showCurrencyValueRow = row.value || row.balance
+                    const valueWithCurrency = row.value ? row.value : `0.00 ${selectedCurrency}`
+
+                    cellItem = (
+                      <Row>
+                        <Col middle="xs">
+                          <div data-testid={`balance-${row[BALANCE_TABLE_ASSET_ID].symbol}`}>
+                            <AssetTableCell asset={row.asset} />
+                            <div>
+                              BALANCE: <span style={{ marginLeft: 5 }}>{row.balance}</span>
+                            </div>
+                            {showCurrencyValueRow && selectedCurrency ? (
+                              <div>
+                                VALUE:
+                                <span style={{ marginLeft: 5 }}>
+                                  {valueWithCurrency}
+                                  <CurrencyTooltip
+                                    valueWithCurrency={valueWithCurrency}
+                                    balanceWithSymbol={row.balance}
+                                  />
+                                </span>
+                              </div>
+                            ) : (
+                              <Skeleton animation="wave" />
+                            )}
+                          </div>
+                        </Col>
+                        <Col xs={4}>
+                          <div className={classes.actions}>
+                            {granted && (
+                              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                <Track {...ASSETS_EVENTS.SEND}>
+                                  <StyledButton
+                                    color="primary"
+                                    onClick={() => showSendFunds(row.asset.address)}
+                                    size="md"
+                                    variant="contained"
+                                    data-testid="balance-send-btn"
+                                  >
+                                    <FixedIcon type="arrowSentWhite" />
+                                    <Text size="xl" color="white">
+                                      Send
+                                    </Text>
+                                  </StyledButton>
+                                </Track>
+                              </div>
+                            )}
+                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                              <Track {...ASSETS_EVENTS.RECEIVE}>
+                                <StyledButton color="primary" onClick={showReceiveFunds} size="md" variant="contained">
+                                  <FixedIcon type="arrowReceivedWhite" />
+                                  <Text size="xl" color="white">
+                                    Receive
+                                  </Text>
+                                </StyledButton>
+                              </Track>
+                            </div>
+                          </div>
+                        </Col>
+                      </Row>
+                    )
+                    break
+                  }
                   default: {
                     cellItem = null
                     break
@@ -143,34 +211,36 @@ const Coins = (props: Props): React.ReactElement => {
                   </TableCell>
                 )
               })}
-              <TableCell component="td">
-                <Row align="end" className={classes.actions}>
-                  {granted && (
-                    <Track {...ASSETS_EVENTS.SEND}>
-                      <StyledButton
-                        color="primary"
-                        onClick={() => showSendFunds(row.asset.address)}
-                        size="md"
-                        variant="contained"
-                        data-testid="balance-send-btn"
-                      >
-                        <FixedIcon type="arrowSentWhite" />
+              {!isMobile && (
+                <TableCell component="td">
+                  <Row align="end" className={classes.actions}>
+                    {granted && (
+                      <Track {...ASSETS_EVENTS.SEND}>
+                        <StyledButton
+                          color="primary"
+                          onClick={() => showSendFunds(row.asset.address)}
+                          size="md"
+                          variant="contained"
+                          data-testid="balance-send-btn"
+                        >
+                          <FixedIcon type="arrowSentWhite" />
+                          <Text size="xl" color="white">
+                            Send
+                          </Text>
+                        </StyledButton>
+                      </Track>
+                    )}
+                    <Track {...ASSETS_EVENTS.RECEIVE}>
+                      <StyledButton color="primary" onClick={showReceiveFunds} size="md" variant="contained">
+                        <FixedIcon type="arrowReceivedWhite" />
                         <Text size="xl" color="white">
-                          Send
+                          Receive
                         </Text>
                       </StyledButton>
                     </Track>
-                  )}
-                  <Track {...ASSETS_EVENTS.RECEIVE}>
-                    <StyledButton color="primary" onClick={showReceiveFunds} size="md" variant="contained">
-                      <FixedIcon type="arrowReceivedWhite" />
-                      <Text size="xl" color="white">
-                        Receive
-                      </Text>
-                    </StyledButton>
-                  </Track>
-                </Row>
-              </TableCell>
+                  </Row>
+                </TableCell>
+              )}
             </TableRow>
           ))
         }
