@@ -67,7 +67,7 @@ module.exports = {
   screenMdMax: 1199,
   screenSm: 768,
   screenSmMax: 991,
-  screenXs: 480,
+  screenXs: 360,
   screenXsMax: 767,
   secondary,
   secondaryFontFamily: 'Averta, monospace',
