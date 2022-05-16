@@ -27,6 +27,7 @@ import PrefixedEthHashInfo from 'src/components/PrefixedEthHashInfo'
 import { AddressBookState } from 'src/logic/addressBook/model/addressBook'
 import Track from 'src/components/Track'
 import { SETTINGS_EVENTS } from 'src/utils/events/settings'
+import { isMobile } from 'react-device-detect'
 
 export const RENAME_OWNER_BTN_TEST_ID = 'rename-owner-btn'
 export const REMOVE_OWNER_BTN_TEST_ID = 'remove-owner-btn'
@@ -109,6 +110,7 @@ const ManageOwners = ({ granted, owners }: Props): ReactElement => {
                             showCopyBtn
                             showAvatar
                             explorerUrl={getExplorerInfo(row[column.id])}
+                            shortenHash={isMobile ? 4 : undefined}
                           />
                         </Block>
                       ) : (

@@ -7,6 +7,7 @@ import { ModalHeader } from 'src/routes/safe/components/Balances/SendModal/scree
 import { getModalEvent } from 'src/utils/events/modals'
 import { trackEvent } from 'src/utils/googleTagManager'
 import { screenSm } from 'src/theme/variables'
+import { isMobile } from 'react-device-detect'
 
 type Theme = typeof theme
 
@@ -75,6 +76,7 @@ interface GnoModalProps {
 }
 
 const GnoModal = ({ children, description, handleClose, open, paperClassName, title }: GnoModalProps): ReactElement => {
+  paperClassName = isMobile ? 'smaller-modal-window' : paperClassName
   return (
     <ModalStyled
       BackdropProps={{ className: 'overlay' }}

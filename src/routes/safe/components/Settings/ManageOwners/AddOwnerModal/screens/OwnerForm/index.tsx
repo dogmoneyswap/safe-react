@@ -98,7 +98,7 @@ export const OwnerForm = ({ onClose, onSubmit, initialValues }: OwnerFormProps):
                   <Paragraph>Add a new owner to the active Safe</Paragraph>
                 </Row>
                 <Row margin="md">
-                  <Col xs={8}>
+                  <Col xs={11}>
                     <Field
                       component={TextField}
                       name="ownerName"
@@ -120,8 +120,8 @@ export const OwnerForm = ({ onClose, onSubmit, initialValues }: OwnerFormProps):
                     </OnChange>
                   </Col>
                 </Row>
-                <Row margin="md">
-                  <Col xs={8}>
+                <Row margin="md" align="center">
+                  <Col xs={11}>
                     <AddressInput
                       fieldMutator={mutators.setOwnerAddress}
                       name="ownerAddress"

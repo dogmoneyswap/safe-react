@@ -141,7 +141,7 @@ const Coins = (props: Props): React.ReactElement => {
                     const valueWithCurrency = row.value ? row.value : `0.00 ${selectedCurrency}`
 
                     cellItem = (
-                      <Row>
+                      <Row align="center">
                         <Col middle="xs">
                           <div data-testid={`balance-${row[BALANCE_TABLE_ASSET_ID].symbol}`}>
                             <AssetTableCell asset={row.asset} />
@@ -164,7 +164,7 @@ const Coins = (props: Props): React.ReactElement => {
                             )}
                           </div>
                         </Col>
-                        <Col xs={4}>
+                        <Col xs={3}>
                           <div className={classes.actions}>
                             {granted && (
                               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -176,7 +176,6 @@ const Coins = (props: Props): React.ReactElement => {
                                     variant="contained"
                                     data-testid="balance-send-btn"
                                   >
-                                    <FixedIcon type="arrowSentWhite" />
                                     <Text size="xl" color="white">
                                       Send
                                     </Text>
@@ -187,7 +186,6 @@ const Coins = (props: Props): React.ReactElement => {
                             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                               <Track {...ASSETS_EVENTS.RECEIVE}>
                                 <StyledButton color="primary" onClick={showReceiveFunds} size="md" variant="contained">
-                                  <FixedIcon type="arrowReceivedWhite" />
                                   <Text size="xl" color="white">
                                     Receive
                                   </Text>

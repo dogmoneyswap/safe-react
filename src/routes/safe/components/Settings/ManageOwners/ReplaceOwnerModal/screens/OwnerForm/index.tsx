@@ -126,7 +126,7 @@ export const OwnerForm = ({ onClose, onSubmit, owner, initialValues }: OwnerForm
                   <Paragraph>New owner</Paragraph>
                 </Row>
                 <Row margin="md">
-                  <Col xs={8}>
+                  <Col xs={11}>
                     <Field
                       component={TextField}
                       name="ownerName"
@@ -149,7 +149,7 @@ export const OwnerForm = ({ onClose, onSubmit, owner, initialValues }: OwnerForm
                   </Col>
                 </Row>
                 <Row margin="md">
-                  <Col xs={8}>
+                  <Col xs={11}>
                     <AddressInput
                       fieldMutator={mutators.setOwnerAddress}
                       name="ownerAddress"

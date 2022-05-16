@@ -21,6 +21,7 @@ import { Errors, logError } from 'src/logic/exceptions/CodedException'
 import { TxModalWrapper } from 'src/routes/safe/components/Transactions/helpers/TxModalWrapper'
 import { Overline } from 'src/components/layout/Typography'
 import { getStepTitle } from 'src/routes/safe/components/Balances/SendModal/utils'
+import { isMobile } from 'react-device-detect'
 
 export const REPLACE_OWNER_SUBMIT_BTN_TEST_ID = 'replace-owner-submit-btn'
 
@@ -129,6 +130,7 @@ export const ReviewReplaceOwnerModal = ({
                           showCopyBtn
                           showAvatar
                           explorerUrl={getExplorerInfo(safeOwner.address)}
+                          shortenHash={isMobile ? 4 : undefined}
                         />
                       </Col>
                     </Row>
@@ -148,6 +150,7 @@ export const ReviewReplaceOwnerModal = ({
                   showCopyBtn
                   showAvatar
                   explorerUrl={getExplorerInfo(owner.address)}
+                  shortenHash={isMobile ? 4 : undefined}
                 />
               </Col>
             </Row>
@@ -163,6 +166,7 @@ export const ReviewReplaceOwnerModal = ({
                   showCopyBtn
                   showAvatar
                   explorerUrl={getExplorerInfo(newOwner.address)}
+                  shortenHash={isMobile ? 4 : undefined}
                 />
               </Col>
             </Row>

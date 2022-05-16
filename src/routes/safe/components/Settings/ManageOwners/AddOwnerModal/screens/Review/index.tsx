@@ -21,6 +21,7 @@ import { Errors, logError } from 'src/logic/exceptions/CodedException'
 import { TxModalWrapper } from 'src/routes/safe/components/Transactions/helpers/TxModalWrapper'
 import { Overline } from 'src/components/layout/Typography'
 import { getStepTitle } from 'src/routes/safe/components/Balances/SendModal/utils'
+import { isMobile } from 'react-device-detect'
 
 const useStyles = makeStyles(styles)
 
@@ -116,6 +117,7 @@ export const ReviewAddOwner = ({ onClickBack, onClose, onSubmit, values }: Revie
                       showCopyBtn
                       showAvatar
                       explorerUrl={getExplorerInfo(owner.address)}
+                      shortenHash={isMobile ? 6 : undefined}
                     />
                   </Col>
                 </Row>
@@ -134,6 +136,7 @@ export const ReviewAddOwner = ({ onClickBack, onClose, onSubmit, values }: Revie
                   showCopyBtn
                   showAvatar
                   explorerUrl={getExplorerInfo(values.ownerAddress)}
+                  shortenHash={isMobile ? 6 : undefined}
                 />
               </Col>
             </Row>

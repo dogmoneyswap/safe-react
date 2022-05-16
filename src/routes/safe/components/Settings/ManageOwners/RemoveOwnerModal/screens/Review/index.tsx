@@ -22,6 +22,7 @@ import ErrorCodes from 'src/logic/exceptions/registry'
 import { TxModalWrapper } from 'src/routes/safe/components/Transactions/helpers/TxModalWrapper'
 import { Overline } from 'src/components/layout/Typography'
 import { getStepTitle } from 'src/routes/safe/components/Balances/SendModal/utils'
+import { isMobile } from 'react-device-detect'
 
 type ReviewRemoveOwnerProps = {
   onClickBack: () => void
@@ -132,6 +133,7 @@ export const ReviewRemoveOwnerModal = ({
                           showCopyBtn
                           showAvatar
                           explorerUrl={getExplorerInfo(safeOwner.address)}
+                          shortenHash={isMobile ? 4 : undefined}
                         />
                       </Col>
                     </Row>
@@ -151,6 +153,7 @@ export const ReviewRemoveOwnerModal = ({
                   showCopyBtn
                   showAvatar
                   explorerUrl={getExplorerInfo(owner.address)}
+                  shortenHash={isMobile ? 4 : undefined}
                 />
               </Col>
             </Row>
