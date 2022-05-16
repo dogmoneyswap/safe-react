@@ -13,6 +13,7 @@ import Row from 'src/components/layout/Row'
 import { headerHeight, md, screenSm, sm } from 'src/theme/variables'
 import { useStateHandler } from 'src/logic/hooks/useStateHandler'
 import SafeLogo from '../assets/smart-safe-multisig-logo.png'
+import SafeLogoMobile from '../assets/smart-safe-multisig-logo-mobile.png'
 import { ROOT_ROUTE } from 'src/routes/routes'
 import WalletSwitch from 'src/components/WalletSwitch'
 import Divider from 'src/components/layout/Divider'
@@ -20,6 +21,7 @@ import { shouldSwitchWalletChain } from 'src/logic/wallets/store/selectors'
 import { useSelector } from 'react-redux'
 import { OVERVIEW_EVENTS } from 'src/utils/events/overview'
 import Track from 'src/components/Track'
+import { isMobile } from 'react-device-detect'
 
 const styles = () => ({
   root: {
@@ -43,7 +45,7 @@ const styles = () => ({
     flexBasis: '140px',
     flexShrink: '0',
     flexGrow: '0',
-    maxWidth: '55px',
+    maxWidth: '95px',
     padding: sm,
     marginTop: '4px',
     [`@media (min-width: ${screenSm}px)`]: {
@@ -99,7 +101,13 @@ const Layout = ({ classes, providerDetails, providerInfo }) => {
       <Col className={classes.logo} middle="xs" start="xs">
         <Track {...OVERVIEW_EVENTS.HOME}>
           <Link to={ROOT_ROUTE}>
-            <Img alt="Smart Safe" height={36} src={SafeLogo} testId="heading-gnosis-logo" id="safe-logo" />
+            <Img
+              alt="Smart Safe"
+              height={36}
+              src={isMobile ? SafeLogoMobile : SafeLogo}
+              testId="heading-gnosis-logo"
+              id="safe-logo"
+            />
           </Link>
         </Track>
       </Col>
