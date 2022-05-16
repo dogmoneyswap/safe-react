@@ -12,7 +12,7 @@ BEFORE SUBMITTING: Please search to make sure this issue hasn't been reported al
 ## Environment
  - Browser: Chrome
  - Wallet: MetaMask
- - Chain: Rinkeby
+ - Chain: SmartBCH
 
 ## Steps to reproduce
  1. Go to
