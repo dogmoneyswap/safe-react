@@ -7,8 +7,8 @@ import { TOGGLE_BATCH_EXECUTE } from '../actions/toggleBatchExecute'
 export const APPEARANCE_REDUCER_ID = 'appearance'
 
 export const initialAppearanceState = {
-  copyShortName: true,
-  showShortName: true,
+  copyShortName: false,
+  showShortName: false,
   batchExecute: false,
 }
 
