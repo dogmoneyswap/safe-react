@@ -45,7 +45,9 @@ const ModalStyled = styled(ModalMUI)`
     }
 
     &.bigger-modal-window {
-      width: 775px;
+      @media (min-width: ${screenSm}px) {
+        width: 775px;
+      }
       height: auto;
     }
 
