@@ -98,7 +98,7 @@ const ContentWrapper = styled.div`
   @media (min-width: ${screenSm}px) {
     padding: 8px 24px;
   }
-  padding-left: 4px;
+  padding-left: 12px;
   padding-right: 0px;
 
   > :nth-child(1) {
