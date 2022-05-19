@@ -32,6 +32,10 @@ const styles = () => ({
   expand: {
     height: '30px',
     width: '30px',
+    display: 'none',
+    [`@media (min-width: ${screenSm}px)`]: {
+      display: 'block',
+    },
   },
 })
 
