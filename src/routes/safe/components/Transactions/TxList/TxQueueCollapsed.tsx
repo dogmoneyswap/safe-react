@@ -19,7 +19,7 @@ const calculateVotes = (executionInfo: MultisigExecutionInfo, isPending: boolean
   if (isPending && submitted < required) return
 
   return {
-    votes: `${submitted} out of ${required}`,
+    votes: `${submitted}/${required}`,
     submitted,
     required,
   }
