@@ -39,7 +39,9 @@ const ModalStyled = styled(ModalMUI)`
     // TODO: replace class-based styles by params
     &.receive-modal {
       height: auto;
-      max-width: calc(100% - 130px);
+      @media (min-width: ${screenSm}px) {
+        max-width: calc(100% - 130px);
+      }
       min-height: 544px;
       overflow: hidden;
     }
