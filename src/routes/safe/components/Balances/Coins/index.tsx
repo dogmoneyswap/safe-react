@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { CSSProperties, useEffect, useMemo } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { List } from 'immutable'
@@ -36,6 +36,12 @@ import { ASSETS_EVENTS } from 'src/utils/events/assets'
 import Track from 'src/components/Track'
 import { isMobile } from 'react-device-detect'
 import Col from 'src/components/layout/Col'
+import { Token } from 'src/logic/tokens/store/model/token'
+import BigNumber from 'bignumber.js'
+import { useMasterChefPool } from 'src/logic/tokens/store/actions/fetchTokenInfo'
+import { useHistory } from 'react-router-dom'
+import { getSafeAppUrl } from 'src/routes/routes'
+import useSafeAddress from 'src/logic/currentSession/hooks/useSafeAddress'
 
 const StyledButton = styled(Button)`
   &&.MuiButton-root {
@@ -51,8 +57,11 @@ const StyledButton = styled(Button)`
 const useStyles = makeStyles(styles)
 
 type Props = {
-  showReceiveFunds: () => void
-  showSendFunds: (tokenAddress: string) => void
+  showReceiveFunds?: () => void
+  showSendFunds?: (tokenAddress: string) => void
+  masterChefAddress?: string
+  masterChefName?: string
+  style?: CSSProperties
 }
 
 type CurrencyTooltipProps = {
@@ -78,12 +87,16 @@ const CurrencyTooltip = (props: CurrencyTooltipProps): React.ReactElement | null
 }
 
 const Coins = (props: Props): React.ReactElement => {
-  const { showReceiveFunds, showSendFunds } = props
+  const { showReceiveFunds, showSendFunds, masterChefAddress, masterChefName, style } = props
+  const history = useHistory()
+  const routeParams = useSafeAddress()
   const classes = useStyles()
   const columns = isMobile ? generateMobileColumns() : generateColumns()
   const autoColumns = columns.filter((c) => !c.custom)
   const selectedCurrency = useSelector(currentCurrencySelector)
-  const safeTokens = useSelector(extendedSafeTokensSelector)
+  const masterChefTokens = useMasterChefPool(masterChefAddress)
+  const walletTokens = useSelector(extendedSafeTokensSelector)
+  const safeTokens = masterChefAddress ? masterChefTokens : walletTokens
   const granted = useSelector(grantedSelector)
 
   const differingTokens = useMemo(() => safeTokens.size, [safeTokens])
@@ -99,8 +112,11 @@ const Coins = (props: Props): React.ReactElement => {
     [safeTokens, selectedCurrency],
   )
 
+  if (filteredData.size == 0) return null as any
+
   return (
-    <TableContainer>
+    <TableContainer style={style}>
+      <h2>{masterChefName}</h2>
       <Table columns={columns} data={filteredData} defaultRowsPerPage={100} label="Balances" size={filteredData.size}>
         {(sortedData) =>
           sortedData.map((row, index) => (
@@ -114,7 +130,22 @@ const Coins = (props: Props): React.ReactElement => {
                     break
                   }
                   case BALANCE_TABLE_BALANCE_ID: {
-                    cellItem = <div data-testid={`balance-${row[BALANCE_TABLE_ASSET_ID].symbol}`}>{row[id]}</div>
+                    const asset = row['asset'] as Token
+                    cellItem = (
+                      <div data-testid={`balance-${row[BALANCE_TABLE_ASSET_ID].symbol}`}>
+                        <div>{row[id]}</div>
+                        {asset.isLpToken && (
+                          <div>
+                            {`${new BigNumber(asset.reserves![0]).times(`1e-${asset.token0!.decimals!}`).toFixed(2)} ${
+                              asset.token0!.symbol
+                            } +
+                            ${new BigNumber(asset.reserves![1]).times(`1e-${asset.token1!.decimals!}`).toFixed(2)} ${
+                              asset.token1!.symbol
+                            }`}
+                          </div>
+                        )}
+                      </div>
+                    )
                     break
                   }
                   case BALANCE_TABLE_VALUE_ID: {
@@ -139,7 +170,7 @@ const Coins = (props: Props): React.ReactElement => {
                   case BALANCE_TABLE_MOBILE_ID: {
                     const showCurrencyValueRow = row.value || row.balance
                     const valueWithCurrency = row.value ? row.value : `0.00 ${selectedCurrency}`
-
+                    const asset = row['asset'] as Token
                     cellItem = (
                       <Row align="center">
                         <Col middle="xs">
@@ -148,6 +179,16 @@ const Coins = (props: Props): React.ReactElement => {
                             <div>
                               BALANCE: <span style={{ marginLeft: 5 }}>{row.balance}</span>
                             </div>
+                            {asset.isLpToken && (
+                              <div>
+                                {`${new BigNumber(asset.reserves![0])
+                                  .times(`1e-${asset.token0!.decimals!}`)
+                                  .toFixed(2)} ${asset.token0!.symbol} /
+                                  ${new BigNumber(asset.reserves![1])
+                                    .times(`1e-${asset.token1!.decimals!}`)
+                                    .toFixed(2)} ${asset.token1!.symbol}`}
+                              </div>
+                            )}
                             {showCurrencyValueRow && selectedCurrency ? (
                               <div>
                                 VALUE:
@@ -164,36 +205,62 @@ const Coins = (props: Props): React.ReactElement => {
                             )}
                           </div>
                         </Col>
-                        <Col xs={3}>
-                          <div className={classes.actions}>
-                            {granted && (
+                        {!masterChefAddress ? (
+                          <Col xs={3}>
+                            <div className={classes.actions}>
+                              {granted && (
+                                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                  <Track {...ASSETS_EVENTS.SEND}>
+                                    <StyledButton
+                                      color="primary"
+                                      onClick={() => showSendFunds!(row.asset.address)}
+                                      size="md"
+                                      variant="contained"
+                                      data-testid="balance-send-btn"
+                                    >
+                                      <Text size="xl" color="white">
+                                        Send
+                                      </Text>
+                                    </StyledButton>
+                                  </Track>
+                                </div>
+                              )}
                               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                <Track {...ASSETS_EVENTS.SEND}>
+                                <Track {...ASSETS_EVENTS.RECEIVE}>
                                   <StyledButton
                                     color="primary"
-                                    onClick={() => showSendFunds(row.asset.address)}
+                                    onClick={showReceiveFunds}
                                     size="md"
                                     variant="contained"
-                                    data-testid="balance-send-btn"
                                   >
                                     <Text size="xl" color="white">
-                                      Send
+                                      Receive
                                     </Text>
                                   </StyledButton>
                                 </Track>
                               </div>
-                            )}
-                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                              <Track {...ASSETS_EVENTS.RECEIVE}>
-                                <StyledButton color="primary" onClick={showReceiveFunds} size="md" variant="contained">
-                                  <Text size="xl" color="white">
-                                    Receive
-                                  </Text>
-                                </StyledButton>
-                              </Track>
                             </div>
-                          </div>
-                        </Col>
+                          </Col>
+                        ) : (
+                          <Col xs={3}>
+                            <div className={classes.actions}>
+                              <StyledButton
+                                color="primary"
+                                onClick={() =>
+                                  history.push(
+                                    getSafeAppUrl('https://app.mistswap.fi/farm?filter=portfolio', routeParams),
+                                  )
+                                }
+                                size="md"
+                                variant="contained"
+                              >
+                                <Text size="md" color="white">
+                                  View on <br /> MistSwap
+                                </Text>
+                              </StyledButton>
+                            </div>
+                          </Col>
+                        )}
                       </Row>
                     )
                     break
@@ -211,32 +278,50 @@ const Coins = (props: Props): React.ReactElement => {
               })}
               {!isMobile && (
                 <TableCell component="td">
-                  <Row align="end" className={classes.actions}>
-                    {granted && (
-                      <Track {...ASSETS_EVENTS.SEND}>
-                        <StyledButton
-                          color="primary"
-                          onClick={() => showSendFunds(row.asset.address)}
-                          size="md"
-                          variant="contained"
-                          data-testid="balance-send-btn"
-                        >
-                          <FixedIcon type="arrowSentWhite" />
+                  {!masterChefAddress ? (
+                    <Row align="end" className={classes.actions}>
+                      {granted && (
+                        <Track {...ASSETS_EVENTS.SEND}>
+                          <StyledButton
+                            color="primary"
+                            onClick={() => showSendFunds!(row.asset.address)}
+                            size="md"
+                            variant="contained"
+                            data-testid="balance-send-btn"
+                          >
+                            <FixedIcon type="arrowSentWhite" />
+                            <Text size="xl" color="white">
+                              Send
+                            </Text>
+                          </StyledButton>
+                        </Track>
+                      )}
+                      <Track {...ASSETS_EVENTS.RECEIVE}>
+                        <StyledButton color="primary" onClick={showReceiveFunds} size="md" variant="contained">
+                          <FixedIcon type="arrowReceivedWhite" />
                           <Text size="xl" color="white">
-                            Send
+                            Receive
                           </Text>
                         </StyledButton>
                       </Track>
-                    )}
-                    <Track {...ASSETS_EVENTS.RECEIVE}>
-                      <StyledButton color="primary" onClick={showReceiveFunds} size="md" variant="contained">
-                        <FixedIcon type="arrowReceivedWhite" />
+                    </Row>
+                  ) : (
+                    <Row align="end" className={classes.actions}>
+                      <StyledButton
+                        color="primary"
+                        onClick={() =>
+                          history.push(getSafeAppUrl('https://app.mistswap.fi/farm?filter=portfolio', routeParams))
+                        }
+                        size="md"
+                        variant="contained"
+                      >
+                        <FixedIcon type="arrowSentWhite" />
                         <Text size="xl" color="white">
-                          Receive
+                          View on MistSwap
                         </Text>
                       </StyledButton>
-                    </Track>
-                  </Row>
+                    </Row>
+                  )}
                 </TableCell>
               )}
             </TableRow>

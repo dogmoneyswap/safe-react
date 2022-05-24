@@ -80,7 +80,18 @@ const Balances = (): ReactElement => {
         <Route
           path={SAFE_ROUTES.ASSETS_BALANCES}
           exact
-          render={() => wrapInSuspense(<Coins showReceiveFunds={openReceive} showSendFunds={setSentToken} />)}
+          render={() =>
+            wrapInSuspense(
+              <div>
+                <Coins showReceiveFunds={openReceive} showSendFunds={setSentToken} />
+                <Coins
+                  style={{ marginTop: -90 }}
+                  masterChefAddress={'0x3A7B9D0ed49a90712da4E087b17eE4Ac1375a5D4'}
+                  masterChefName={'MistSwap Staked Assets'}
+                />
+              </div>,
+            )
+          }
         />
       </Switch>
 

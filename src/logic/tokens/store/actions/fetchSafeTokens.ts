@@ -12,6 +12,7 @@ import { currentCurrencySelector } from 'src/logic/currencyValues/store/selector
 import { ZERO_ADDRESS, sameAddress } from 'src/logic/wallets/ethAddresses'
 import { Errors, logError } from 'src/logic/exceptions/CodedException'
 import { SafeBalanceResponse } from '@gnosis.pm/safe-react-gateway-sdk'
+import { fetchLpTokenInfo } from './fetchTokenInfo'
 
 export type BalanceRecord = {
   tokenAddress?: string
@@ -68,6 +69,8 @@ export const fetchSafeTokens =
       logError(Errors._601, e.message)
       return
     }
+
+    await fetchLpTokenInfo(tokenCurrenciesBalances)
 
     const { balances, ethBalance, tokens } = tokenCurrenciesBalances.items.reduce<ExtractedData>(
       extractDataFromResult,
