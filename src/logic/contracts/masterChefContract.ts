@@ -1,4 +1,4 @@
-import { MasterChef } from 'src/types/contracts/MasterChef'
+import { MasterChef } from 'src/types/contracts/masterChef'
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
 import masterChef from './abi/masterChef.json'
