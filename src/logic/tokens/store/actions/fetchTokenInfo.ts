@@ -185,19 +185,96 @@ export const getMasterChefStakedTokens = async (
   return List<Token>(tokens)
 }
 
-export const useMasterChefPool = (masterChefAddress?: string): List<Token> => {
+// requires sushi token to be listed on coingecko
+export const getSushiBarBalance = async (
+  sushiTokenAddress: string,
+  xSushiTokenAddress: string,
+  safeAddress: string,
+): Promise<SafeBalanceResponse> => {
+  const web3 = getWeb3ReadOnly()
+
+  const sushiContract = await getERC20TokenContract(sushiTokenAddress)
+  const xSushiContract = await getERC20TokenContract(xSushiTokenAddress)
+  const xSushiStaked = xSushiContract.methods.balanceOf(safeAddress)
+  const sushiInBar = sushiContract.methods.balanceOf(xSushiTokenAddress)
+  const xSushiTotalSupply = xSushiContract.methods.totalSupply()
+  const sushiDecimals = sushiContract.methods.decimals()
+
+  const multicallResult = await multicall(web3, [xSushiStaked, sushiInBar, xSushiTotalSupply, sushiDecimals])
+
+  if (multicallResult[0] === '0') {
+    return {
+      fiatTotal: '0',
+      items: [],
+    } as SafeBalanceResponse
+  }
+
+  const rawBalance = new BigNumber(multicallResult[0]).times(multicallResult[1]).dividedToIntegerBy(multicallResult[2])
+  const sushiBalance = rawBalance.dividedBy(10 ** multicallResult[3])
+
+  const url = (address: string) =>
+    `https://api.coingecko.com/api/v3/simple/token_price/smartbch?contract_addresses=${address}&vs_currencies=usd`
+  const response = await fetch(url(sushiTokenAddress))
+  const json = await response.json()
+  const price = json[sushiTokenAddress.toLowerCase()]?.usd
+
+  return {
+    fiatTotal: sushiBalance.times(price).toFixed(2),
+    items: [
+      {
+        balance: multicallResult[0],
+        fiatBalance: sushiBalance.times(price).toFixed(2),
+        fiatConversion: sushiBalance
+          .times(price)
+          .dividedBy(multicallResult[0])
+          .dividedBy(10 ** multicallResult[3])
+          .toFixed(2),
+        tokenInfo: await getTokenInfo(xSushiTokenAddress),
+      },
+    ],
+  } as SafeBalanceResponse
+}
+
+export const getSushiBarStakedTokens = async (
+  sushiTokenAddress: string,
+  xSushiTokenAddress: string,
+  safeAddress: string,
+): Promise<List<Token>> => {
+  if (!sushiTokenAddress || !xSushiTokenAddress) {
+    return List<Token>()
+  }
+
+  const balances = await getSushiBarBalance(sushiTokenAddress, xSushiTokenAddress, safeAddress)
+  const tokens = balances.items.map((item) => {
+    const token = makeToken({ ...item.tokenInfo }).set('balance', {
+      tokenBalance: humanReadableValue(item.balance, Number(item.tokenInfo.decimals)),
+      fiatBalance: item.fiatBalance,
+    })
+    return token
+  })
+  return List<Token>(tokens)
+}
+
+export type MasterChefSTakedTokensOptions = {
+  masterChefAddress?: string
+  sushiTokenAddress?: string
+  xSushiTokenAddress?: string
+}
+
+export const useMasterChefStakedTokens = (options: MasterChefSTakedTokensOptions): List<Token> => {
   const { safeAddress } = useSafeAddress()
+  const { masterChefAddress, sushiTokenAddress, xSushiTokenAddress } = options
 
   const [tokens = List<Token>(), setTokens] = useState<List<Token>>()
 
   useEffect(() => {
     const lookup = async () => {
       const tokens = await getMasterChefStakedTokens(masterChefAddress || '', safeAddress)
-
-      setTokens(List<Token>(tokens))
+      const barTokens = await getSushiBarStakedTokens(sushiTokenAddress || '', xSushiTokenAddress || '', safeAddress)
+      setTokens(List<Token>([...barTokens, ...tokens]))
     }
     lookup()
-  }, [masterChefAddress, safeAddress, setTokens])
+  }, [masterChefAddress, safeAddress, sushiTokenAddress, xSushiTokenAddress, setTokens])
 
   return tokens
 }

@@ -36,7 +36,7 @@ import { isMobile } from 'react-device-detect'
 import Col from 'src/components/layout/Col'
 import { Token } from 'src/logic/tokens/store/model/token'
 import BigNumber from 'bignumber.js'
-import { useMasterChefPool } from 'src/logic/tokens/store/actions/fetchTokenInfo'
+import { useMasterChefStakedTokens } from 'src/logic/tokens/store/actions/fetchTokenInfo'
 import { useHistory } from 'react-router-dom'
 import { getSafeAppUrl } from 'src/routes/routes'
 import useSafeAddress from 'src/logic/currentSession/hooks/useSafeAddress'
@@ -90,8 +90,11 @@ const Coins = (props: Props): React.ReactElement => {
   const columns = isMobile ? generateMobileColumns() : generateColumns()
   const autoColumns = columns.filter((c) => !c.custom)
   const selectedCurrency = useSelector(currentCurrencySelector)
-  const safeTokens = useMasterChefPool(masterChefAddress)
-
+  const safeTokens = useMasterChefStakedTokens({
+    masterChefAddress,
+    sushiTokenAddress: '0x5fA664f69c2A4A3ec94FaC3cBf7049BD9CA73129',
+    xSushiTokenAddress: '0xC41C680c60309d4646379eD62020c534eB67b6f4',
+  })
   const differingTokens = useMemo(() => safeTokens.size, [safeTokens])
   useEffect(() => {
     // Safe does not have any tokens until fetching is complete
@@ -99,6 +102,14 @@ const Coins = (props: Props): React.ReactElement => {
       trackEvent({ ...ASSETS_EVENTS.DIFFERING_TOKENS, label: differingTokens })
     }
   }, [differingTokens])
+
+  const navigate = (token: Token) => {
+    if (token.isLpToken) {
+      history.push(getSafeAppUrl('https://app.mistswap.fi/farm?filter=portfolio', routeParams))
+    } else {
+      history.push(getSafeAppUrl('https://app.mistswap.fi/stake', routeParams))
+    }
+  }
 
   const filteredData: List<BalanceData> = useMemo(
     () => getBalanceData(safeTokens, selectedCurrency),
@@ -200,16 +211,7 @@ const Coins = (props: Props): React.ReactElement => {
                         </Col>
                         <Col xs={3}>
                           <div className={classes.actions}>
-                            <StyledButton
-                              color="primary"
-                              onClick={() =>
-                                history.push(
-                                  getSafeAppUrl('https://app.mistswap.fi/farm?filter=portfolio', routeParams),
-                                )
-                              }
-                              size="md"
-                              variant="contained"
-                            >
+                            <StyledButton color="primary" onClick={() => navigate(asset)} size="md" variant="contained">
                               <Text size="md" color="white">
                                 View on <br /> MistSwap
                               </Text>
@@ -236,9 +238,7 @@ const Coins = (props: Props): React.ReactElement => {
                   <Row align="end" className={classes.actions}>
                     <StyledButton
                       color="primary"
-                      onClick={() =>
-                        history.push(getSafeAppUrl('https://app.mistswap.fi/farm?filter=portfolio', routeParams))
-                      }
+                      onClick={() => navigate(row['asset'] as Token)}
                       size="md"
                       variant="contained"
                     >
