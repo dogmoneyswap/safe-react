@@ -52,6 +52,15 @@ const StyledButton = styled(Button)`
   }
 `
 
+const StakedAssetsText = styled.div`
+  color: #4c4c4c;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0p;
+`
+
 const useStyles = makeStyles(styles)
 
 type Props = {
@@ -120,7 +129,7 @@ const Coins = (props: Props): React.ReactElement => {
 
   return (
     <TableContainer style={style}>
-      <h2>{masterChefName}</h2>
+      <StakedAssetsText>{masterChefName}</StakedAssetsText>
       <Table columns={columns} data={filteredData} defaultRowsPerPage={100} label="Balances" size={filteredData.size}>
         {(sortedData) =>
           sortedData.map((row, index) => (
