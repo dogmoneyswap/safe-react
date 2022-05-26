@@ -16,6 +16,7 @@ import useSafeAddress from 'src/logic/currentSession/hooks/useSafeAddress'
 
 const Collectibles = lazy(() => import('src/routes/safe/components/Balances/Collectibles'))
 const Coins = lazy(() => import('src/routes/safe/components/Balances/Coins'))
+const StakedCoins = lazy(() => import('src/routes/safe/components/Balances/StakedCoins'))
 
 export const MANAGE_TOKENS_BUTTON_TEST_ID = 'manage-tokens-btn'
 export const BALANCE_ROW_TEST_ID = 'balance-row'
@@ -80,7 +81,18 @@ const Balances = (): ReactElement => {
         <Route
           path={SAFE_ROUTES.ASSETS_BALANCES}
           exact
-          render={() => wrapInSuspense(<Coins showReceiveFunds={openReceive} showSendFunds={setSentToken} />)}
+          render={() =>
+            wrapInSuspense(
+              <div>
+                <Coins showReceiveFunds={openReceive} showSendFunds={setSentToken} />
+                <StakedCoins
+                  style={{ marginTop: -90 }}
+                  masterChefAddress={'0x3A7B9D0ed49a90712da4E087b17eE4Ac1375a5D4'}
+                  masterChefName={'MistSwap Staked Assets'}
+                />
+              </div>,
+            )
+          }
         />
       </Switch>
 

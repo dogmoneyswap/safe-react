@@ -11,6 +11,10 @@ export type TokenProps = {
   logoUri: string | null
   balance: BalanceRecord
   type?: TokenType
+  isLpToken?: boolean
+  token0?: TokenProps
+  token1?: TokenProps
+  reserves?: Array<string>
 }
 
 export const makeToken = Record<TokenProps>({
@@ -23,6 +27,10 @@ export const makeToken = Record<TokenProps>({
     fiatBalance: '0',
     tokenBalance: '0',
   },
+  isLpToken: false,
+  token0: undefined,
+  token1: undefined,
+  reserves: undefined,
 })
 // balance is only set in extendedSafeTokensSelector when we display user's token balances
 

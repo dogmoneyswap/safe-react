@@ -95,7 +95,11 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   overflow-x: auto;
 
-  padding: 8px 24px;
+  @media (min-width: ${screenSm}px) {
+    padding: 8px 24px;
+  }
+  padding-left: 12px;
+  padding-right: 0px;
 
   > :nth-child(1) {
     flex-grow: 1;

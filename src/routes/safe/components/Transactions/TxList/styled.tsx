@@ -1,7 +1,7 @@
 import { Text, Accordion, AccordionDetails, AccordionSummary, EthHashInfo } from '@gnosis.pm/safe-react-components'
 
 import PrefixedEthHashInfo from 'src/components/PrefixedEthHashInfo'
-import { grey400, lg, md, primary200, primary300, sm } from 'src/theme/variables'
+import { grey400, lg, md, primary200, primary300, screenSm, sm } from 'src/theme/variables'
 import styled, { css } from 'styled-components'
 import { isDeeplinkedTx } from './utils'
 
@@ -333,7 +333,11 @@ export const TxDetailsContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.separator} !important;
   display: grid;
   gap: 2px;
-  grid-template-columns: 2fr 1fr;
+
+  grid-template-columns: 3fr;
+  @media (min-width: ${screenSm}px) {
+    grid-template-columns: 2fr 1fr;
+  }
   width: 100%;
 
   & > div {

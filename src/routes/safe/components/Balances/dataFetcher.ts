@@ -7,7 +7,7 @@ export const BALANCE_TABLE_BALANCE_ID = 'balance'
 export const BALANCE_TABLE_VALUE_ID = 'value'
 export const BALANCE_TABLE_MOBILE_ID = 'mobile'
 export interface BalanceData {
-  asset: { name: string; logoUri: string; address: string; symbol: string }
+  asset: Token
   assetOrder: string
   balance: string
   balanceOrder: number
@@ -20,12 +20,7 @@ export const getBalanceData = (safeTokens: List<Token>, currencySelected: string
     const { tokenBalance, fiatBalance } = token.balance
 
     return {
-      [BALANCE_TABLE_ASSET_ID]: {
-        name: token.name,
-        logoUri: token.logoUri || '',
-        address: token.address,
-        symbol: token.symbol,
-      },
+      [BALANCE_TABLE_ASSET_ID]: token,
       assetOrder: token.name,
       [BALANCE_TABLE_BALANCE_ID]: formatCurrency(tokenBalance?.toString() || '0', token.symbol),
       balanceOrder: Number(tokenBalance),
@@ -83,7 +78,7 @@ export const generateMobileColumns = (): List<TableColumn> => {
     id: BALANCE_TABLE_MOBILE_ID,
     order: false,
     disablePadding: false,
-    label: 'Mobile',
+    label: 'Assets',
     custom: false,
   }
 

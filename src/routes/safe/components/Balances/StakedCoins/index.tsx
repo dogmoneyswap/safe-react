@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { CSSProperties, useEffect, useMemo } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { List } from 'immutable'
@@ -27,17 +27,19 @@ import {
   generateMobileColumns,
   BALANCE_TABLE_MOBILE_ID,
 } from 'src/routes/safe/components/Balances/dataFetcher'
-import { extendedSafeTokensSelector, grantedSelector } from 'src/routes/safe/container/selector'
 import { makeStyles } from '@material-ui/core/styles'
 import { styles } from './styles'
 import { currentCurrencySelector } from 'src/logic/currencyValues/store/selectors'
 import { trackEvent } from 'src/utils/googleTagManager'
 import { ASSETS_EVENTS } from 'src/utils/events/assets'
-import Track from 'src/components/Track'
 import { isMobile } from 'react-device-detect'
 import Col from 'src/components/layout/Col'
 import { Token } from 'src/logic/tokens/store/model/token'
 import BigNumber from 'bignumber.js'
+import { useMasterChefStakedTokens } from 'src/logic/tokens/store/actions/fetchTokenInfo'
+import { useHistory } from 'react-router-dom'
+import { getSafeAppUrl } from 'src/routes/routes'
+import useSafeAddress from 'src/logic/currentSession/hooks/useSafeAddress'
 
 const StyledButton = styled(Button)`
   &&.MuiButton-root {
@@ -53,8 +55,9 @@ const StyledButton = styled(Button)`
 const useStyles = makeStyles(styles)
 
 type Props = {
-  showReceiveFunds: () => void
-  showSendFunds: (tokenAddress: string) => void
+  masterChefAddress: string
+  masterChefName: string
+  style?: CSSProperties
 }
 
 type CurrencyTooltipProps = {
@@ -80,14 +83,18 @@ const CurrencyTooltip = (props: CurrencyTooltipProps): React.ReactElement | null
 }
 
 const Coins = (props: Props): React.ReactElement => {
-  const { showReceiveFunds, showSendFunds } = props
+  const { masterChefAddress, masterChefName, style } = props
+  const history = useHistory()
+  const routeParams = useSafeAddress()
   const classes = useStyles()
   const columns = isMobile ? generateMobileColumns() : generateColumns()
   const autoColumns = columns.filter((c) => !c.custom)
   const selectedCurrency = useSelector(currentCurrencySelector)
-  const safeTokens = useSelector(extendedSafeTokensSelector)
-  const granted = useSelector(grantedSelector)
-
+  const safeTokens = useMasterChefStakedTokens({
+    masterChefAddress,
+    sushiTokenAddress: '0x5fA664f69c2A4A3ec94FaC3cBf7049BD9CA73129',
+    xSushiTokenAddress: '0xC41C680c60309d4646379eD62020c534eB67b6f4',
+  })
   const differingTokens = useMemo(() => safeTokens.size, [safeTokens])
   useEffect(() => {
     // Safe does not have any tokens until fetching is complete
@@ -96,13 +103,24 @@ const Coins = (props: Props): React.ReactElement => {
     }
   }, [differingTokens])
 
+  const navigate = (token: Token) => {
+    if (token.isLpToken) {
+      history.push(getSafeAppUrl('https://app.mistswap.fi/farm?filter=portfolio', routeParams))
+    } else {
+      history.push(getSafeAppUrl('https://app.mistswap.fi/stake', routeParams))
+    }
+  }
+
   const filteredData: List<BalanceData> = useMemo(
     () => getBalanceData(safeTokens, selectedCurrency),
     [safeTokens, selectedCurrency],
   )
 
+  if (filteredData.size == 0) return null as any
+
   return (
-    <TableContainer>
+    <TableContainer style={style}>
+      <h2>{masterChefName}</h2>
       <Table columns={columns} data={filteredData} defaultRowsPerPage={100} label="Balances" size={filteredData.size}>
         {(sortedData) =>
           sortedData.map((row, index) => (
@@ -193,32 +211,11 @@ const Coins = (props: Props): React.ReactElement => {
                         </Col>
                         <Col xs={3}>
                           <div className={classes.actions}>
-                            {granted && (
-                              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                <Track {...ASSETS_EVENTS.SEND}>
-                                  <StyledButton
-                                    color="primary"
-                                    onClick={() => showSendFunds(row.asset.address)}
-                                    size="md"
-                                    variant="contained"
-                                    data-testid="balance-send-btn"
-                                  >
-                                    <Text size="xl" color="white">
-                                      Send
-                                    </Text>
-                                  </StyledButton>
-                                </Track>
-                              </div>
-                            )}
-                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                              <Track {...ASSETS_EVENTS.RECEIVE}>
-                                <StyledButton color="primary" onClick={showReceiveFunds} size="md" variant="contained">
-                                  <Text size="xl" color="white">
-                                    Receive
-                                  </Text>
-                                </StyledButton>
-                              </Track>
-                            </div>
+                            <StyledButton color="primary" onClick={() => navigate(asset)} size="md" variant="contained">
+                              <Text size="md" color="white">
+                                View on <br /> MistSwap
+                              </Text>
+                            </StyledButton>
                           </div>
                         </Col>
                       </Row>
@@ -239,30 +236,17 @@ const Coins = (props: Props): React.ReactElement => {
               {!isMobile && (
                 <TableCell component="td">
                   <Row align="end" className={classes.actions}>
-                    {granted && (
-                      <Track {...ASSETS_EVENTS.SEND}>
-                        <StyledButton
-                          color="primary"
-                          onClick={() => showSendFunds(row.asset.address)}
-                          size="md"
-                          variant="contained"
-                          data-testid="balance-send-btn"
-                        >
-                          <FixedIcon type="arrowSentWhite" />
-                          <Text size="xl" color="white">
-                            Send
-                          </Text>
-                        </StyledButton>
-                      </Track>
-                    )}
-                    <Track {...ASSETS_EVENTS.RECEIVE}>
-                      <StyledButton color="primary" onClick={showReceiveFunds} size="md" variant="contained">
-                        <FixedIcon type="arrowReceivedWhite" />
-                        <Text size="xl" color="white">
-                          Receive
-                        </Text>
-                      </StyledButton>
-                    </Track>
+                    <StyledButton
+                      color="primary"
+                      onClick={() => navigate(row['asset'] as Token)}
+                      size="md"
+                      variant="contained"
+                    >
+                      <FixedIcon type="arrowSentWhite" />
+                      <Text size="xl" color="white">
+                        View on MistSwap
+                      </Text>
+                    </StyledButton>
                   </Row>
                 </TableCell>
               )}
