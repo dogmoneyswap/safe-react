@@ -18,6 +18,7 @@ const wallets = (chainId: ChainId): Wallet[] => {
   const rpcUrl = getRpcServiceUrl(rpcUri)
 
   return [
+    { walletName: WALLETS.INJECTED, preferred: true, desktop: true, display: { mobile: true, desktop: true } },
     { walletName: WALLETS.METAMASK, preferred: true, desktop: false },
     {
       walletName: WALLETS.WALLET_CONNECT,

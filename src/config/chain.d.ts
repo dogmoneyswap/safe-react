@@ -19,6 +19,7 @@ export const CHAIN_ID: Record<ChainName, ChainId> = {
 
 // Values match that required of onboard and returned by CGW
 export enum WALLETS {
+  INJECTED = 'detectedwallet',
   SAFE_MOBILE = 'safeMobile',
   METAMASK = 'metamask',
   WALLET_CONNECT = 'walletConnect',
