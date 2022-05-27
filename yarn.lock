@@ -1872,9 +1872,9 @@
   resolved "https://registry.yarnpkg.com/@gnosis.pm/safe-deployments/-/safe-deployments-1.8.0.tgz#856c15517274f924539ea4df40fffe6f009249a7"
   integrity sha512-xK2ZZXxCEGOw+6UZAeUmvqE/4C/XTpYmv1a8KzKUgSOxcGkHsIDqcjdKjqif7gOdnwHl4+XXJUtDQEuSLT4Scg==
 
-"@gnosis.pm/safe-deployments@git+https://github.com/mainnet-pat/safe-deployments#main":
-  version "1.12.0"
-  resolved "git+https://github.com/mainnet-pat/safe-deployments#b632b0151f320cd0c10900cbd62a85f6b5597456"
+"@gnosis.pm/safe-deployments@git+https://github.com/mistswapdex/safe-deployments#dist":
+  version "1.14.0"
+  resolved "git+https://github.com/mistswapdex/safe-deployments#abd422480e84412cad907bd9811007ce167bbce4"
 
 "@gnosis.pm/safe-modules-deployments@^1.0.0":
   version "1.0.0"
