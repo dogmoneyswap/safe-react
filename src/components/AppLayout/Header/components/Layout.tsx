@@ -55,7 +55,9 @@ const styles = () => ({
     },
   },
   wallet: {
-    paddingRight: md,
+    [`@media (min-width: ${screenSm}px)`]: {
+      paddingRight: md,
+    },
   },
   popper: {
     zIndex: 1301,
