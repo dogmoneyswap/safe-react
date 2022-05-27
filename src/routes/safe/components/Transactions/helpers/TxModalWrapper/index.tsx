@@ -245,7 +245,7 @@ export const TxModalWrapper = ({
               confirmButtonProps={{
                 onClick: () => onSubmitClick(txParameters),
                 status: submitStatus,
-                disabled: isSubmitDisabled,
+                disabled: isSubmitDisabled || gasLimit === '0',
                 color: isRejectTx ? 'error' : undefined,
                 text: txEstimationExecutionStatus === EstimationStatus.LOADING ? 'Estimating' : submitText,
                 testId: 'submit-tx-btn',
