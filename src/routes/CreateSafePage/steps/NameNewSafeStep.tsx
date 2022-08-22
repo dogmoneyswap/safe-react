@@ -89,7 +89,7 @@ function NameNewSafeStep(): ReactElement {
       <Block margin="md">
         <Paragraph color="primary" noMargin size="lg">
           You are about to create a new Smart Safe wallet with one or more owners. First, let&apos;s give your new
-          wallet a name. This name is only stored locally and will never be shared with MistSwap or any third parties.
+          wallet a name. This name is only stored locally and will never be shared with DogMoney or any third parties.
           The new Safe will ONLY be available on <NetworkLabel />
         </Paragraph>
       </Block>

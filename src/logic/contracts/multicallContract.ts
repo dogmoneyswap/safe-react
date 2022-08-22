@@ -6,6 +6,7 @@ import { Multicall2 } from 'src/types/contracts/multicall2'
 export const MULTICALL2_ADDRESS: any = {
   10000: '0x3718e9C405D0bC779870355C34fb5624196A1cAA',
   10001: '0xAF15A45d934a83b95daCFEbaACCaED8cF97e8200',
+  2000: '0x62D27b8E8Bd1dBa6c163B4758Dedc2A384BF5aE4',
 }
 
 /**

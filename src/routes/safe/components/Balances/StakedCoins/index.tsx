@@ -101,8 +101,8 @@ const Coins = (props: Props): React.ReactElement => {
   const selectedCurrency = useSelector(currentCurrencySelector)
   const safeTokens = useMasterChefStakedTokens({
     masterChefAddress,
-    sushiTokenAddress: '0x5fA664f69c2A4A3ec94FaC3cBf7049BD9CA73129',
-    xSushiTokenAddress: '0xC41C680c60309d4646379eD62020c534eB67b6f4',
+    sushiTokenAddress: '0x93C8a00416dD8AB9701fa15CA120160172039851',
+    xSushiTokenAddress: '0xC5c70fA7A518bE9229eB0Dc84e70a91683694562',
   })
   const differingTokens = useMemo(() => safeTokens.size, [safeTokens])
   useEffect(() => {
@@ -114,9 +114,9 @@ const Coins = (props: Props): React.ReactElement => {
 
   const navigate = (token: Token) => {
     if (token.isLpToken) {
-      history.push(getSafeAppUrl('https://app.mistswap.fi/farm?filter=portfolio', routeParams))
+      history.push(getSafeAppUrl('https://app.dogmoney.money/farm?filter=portfolio', routeParams))
     } else {
-      history.push(getSafeAppUrl('https://app.mistswap.fi/stake', routeParams))
+      history.push(getSafeAppUrl('https://app.dogmoney.moneu/stake', routeParams))
     }
   }
 
@@ -222,7 +222,7 @@ const Coins = (props: Props): React.ReactElement => {
                           <div className={classes.actions}>
                             <StyledButton color="primary" onClick={() => navigate(asset)} size="md" variant="contained">
                               <Text size="md" color="white">
-                                View on <br /> MistSwap
+                                View on <br /> DogMoney
                               </Text>
                             </StyledButton>
                           </div>
@@ -253,7 +253,7 @@ const Coins = (props: Props): React.ReactElement => {
                     >
                       <FixedIcon type="arrowSentWhite" />
                       <Text size="xl" color="white">
-                        View on MistSwap
+                        View on DogMoney
                       </Text>
                     </StyledButton>
                   </Row>

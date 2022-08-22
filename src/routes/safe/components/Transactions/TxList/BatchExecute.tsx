@@ -210,7 +210,7 @@ export const BatchExecute = React.memo((): ReactElement => {
           <Row margin="md">
             <Paragraph noMargin>
               This transaction batches a total of {batchableTransactions.length} transactions from your queue into a
-              single smartBCH transaction. Please check every included transaction carefully, especially if you have
+              single Dogechain transaction. Please check every included transaction carefully, especially if you have
               rejection transactions, and make sure you want to execute all of them. Included transactions are
               highlighted in green when you hover over the execute button.
             </Paragraph>

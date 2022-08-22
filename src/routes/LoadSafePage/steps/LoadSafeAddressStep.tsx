@@ -147,7 +147,7 @@ function LoadSafeAddressStep(): ReactElement {
       <Block margin="md">
         <Paragraph color="primary" noMargin size="lg">
           You are about to add an existing Smart Safe on <NetworkLabel />. First, choose a name and enter the Safe
-          address. The name is only stored locally and will never be shared with MistSwap or any third parties.
+          address. The name is only stored locally and will never be shared with DogMoney or any third parties.
         </Paragraph>
         <Paragraph color="primary" size="lg">
           Your connected wallet does not have to be the owner of this Safe. In this case, the interface will provide you

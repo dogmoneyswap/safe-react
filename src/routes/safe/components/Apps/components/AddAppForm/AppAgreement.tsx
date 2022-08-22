@@ -19,7 +19,7 @@ const AppAgreement = (): React.ReactElement => {
   return (
     <Field
       component={StyledCheckbox}
-      label={<Text size="xl">This app is not a MistSwap product and I agree to use this app at my own risk.</Text>}
+      label={<Text size="xl">This app is not a DogMoney product and I agree to use this app at my own risk.</Text>}
       name="agreementAccepted"
       type="checkbox"
       validate={validate}

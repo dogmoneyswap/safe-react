@@ -33,7 +33,7 @@ const SearchInputCard = ({ value, onValueChange }: Props): React.ReactElement =>
         )
       }
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value)}
-      placeholder="e.g. MistSwap"
+      placeholder="e.g. DogMoney"
       value={value}
       style={{ width: '100%' }}
       onBlur={() => {

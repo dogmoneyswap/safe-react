@@ -87,8 +87,8 @@ const Balances = (): ReactElement => {
                 <Coins showReceiveFunds={openReceive} showSendFunds={setSentToken} />
                 <StakedCoins
                   style={{ marginTop: -90 }}
-                  masterChefAddress={'0x3A7B9D0ed49a90712da4E087b17eE4Ac1375a5D4'}
-                  masterChefName={'MistSwap Staked Assets'}
+                  masterChefAddress={'0xC1627D9b0Fe967DC37f95D33Af82D0565A01f54B'}
+                  masterChefName={'Dog Money Staked Assets'}
                 />
               </div>,
             )

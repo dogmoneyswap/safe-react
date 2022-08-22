@@ -46,6 +46,6 @@ export const isUserAnOwner = (safe: SafeRecord, userAccount: string): boolean =>
 export const isUserAnOwnerOfAnySafe = (safes: List<SafeRecord> | SafeRecord[], userAccount: string): boolean =>
   safes.some((safe: SafeRecord) => isUserAnOwner(safe, userAccount))
 
-export const isValidEnsName = (name: string): boolean => /^([\w-]+\.)+(eth|test|xyz|luxe|ewc|bch)$/.test(name)
+export const isValidEnsName = (name: string): boolean => /^([\w-]+\.)+(eth|test|xyz|luxe|ewc|doge)$/.test(name)
 
 export const isValidCryptoDomainName = (name: string): boolean => /^([\w-]+\.)+(crypto)$/.test(name)

@@ -135,7 +135,7 @@ export const getMasterChefPoolBalances = async (
   result.items = await Promise.all(
     result.items.map(async (item: any) => {
       const url = (address: string) =>
-        `https://api.coingecko.com/api/v3/simple/token_price/smartbch?contract_addresses=${address}&vs_currencies=usd`
+        `https://api.coingecko.com/api/v3/simple/token_price/dogechain?contract_addresses=${address}&vs_currencies=usd`
       const prices = await Promise.all(
         [item.tokenInfo.token0.address, item.tokenInfo.token1.address].map(async (address: string) => {
           const response = await fetch(url(address))
@@ -213,7 +213,7 @@ export const getSushiBarBalance = async (
   const sushiBalance = rawBalance.dividedBy(10 ** multicallResult[3])
 
   const url = (address: string) =>
-    `https://api.coingecko.com/api/v3/simple/token_price/smartbch?contract_addresses=${address}&vs_currencies=usd`
+    `https://api.coingecko.com/api/v3/simple/token_price/dogechain?contract_addresses=${address}&vs_currencies=usd`
   const response = await fetch(url(sushiTokenAddress))
   const json = await response.json()
   const price = json[sushiTokenAddress.toLowerCase()]?.usd

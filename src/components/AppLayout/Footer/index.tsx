@@ -58,13 +58,13 @@ const Footer = (): React.ReactElement => {
     <footer className={classes.footer}>
       <span className={classes.item}>
         ©{date.getFullYear()}&nbsp;
-        <Link className={cn(classes.item, classes.link)} target="_blank" to="https://mistswap.fi">
-          MistSwap
+        <Link className={cn(classes.item, classes.link)} target="_blank" to="https://dogmoney.money">
+          DogMoney
         </Link>
       </span>
       <span className={classes.sep}>|</span>
-      <Link className={cn(classes.item, classes.link)} target="_blank" to="https://github.com/mistswapdex/safe-react">
-        {appVersion} + SmartBCH Patches
+      <Link className={cn(classes.item, classes.link)} target="_blank" to="https://github.com/dogmoneyswap/safe-react">
+        {appVersion} + Dogechain Patches
       </Link>
     </footer>
   )
