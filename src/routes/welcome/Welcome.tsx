@@ -15,10 +15,10 @@ function Welcome(): ReactElement {
     <Page align="center">
       <Block>
         <Title size="md" strong>
-          Welcome to Smart Safe Multisig.
+          Welcome to Dog Safe Multisig.
         </Title>
         <Title size="xs">
-          Smart Safe is based on <a href="https://gnosis-safe.io/">Gnosis Safe</a>. Here is how to get started:
+          Dog Safe is based on <a href="https://gnosis-safe.io/">Gnosis Safe</a>. Here is how to get started:
         </Title>
         <CardsContainer>
           <StyledCard>

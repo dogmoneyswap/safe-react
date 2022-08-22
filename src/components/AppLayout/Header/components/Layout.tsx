@@ -42,7 +42,7 @@ const styles = () => ({
     zIndex: 1301,
   },
   logo: {
-    flexBasis: '140px',
+    flexBasis: '160px',
     flexShrink: '0',
     flexGrow: '0',
     maxWidth: '95px',
@@ -104,7 +104,7 @@ const Layout = ({ classes, providerDetails, providerInfo }) => {
         <Track {...OVERVIEW_EVENTS.HOME}>
           <Link to={ROOT_ROUTE}>
             <Img
-              alt="Smart Safe"
+              alt="Dog Safe"
               height={36}
               src={isMobile ? SafeLogoMobile : SafeLogo}
               testId="heading-gnosis-logo"

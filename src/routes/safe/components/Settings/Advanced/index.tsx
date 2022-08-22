@@ -60,8 +60,8 @@ const Advanced = (): ReactElement => {
           Safe Nonce
         </Title>
         <InfoText size="lg">
-          For security reasons, transactions made with Smart Safe need to be executed in order. The nonce shows you
-          which transaction will be executed next. You can find the nonce for a transaction in the transaction details.
+          For security reasons, transactions made with Dog Safe need to be executed in order. The nonce shows you which
+          transaction will be executed next. You can find the nonce for a transaction in the transaction details.
         </InfoText>
         <InfoText color="secondaryLight" size="xl">
           Current Nonce: <Bold data-testid={'current-nonce'}>{nonce}</Bold>

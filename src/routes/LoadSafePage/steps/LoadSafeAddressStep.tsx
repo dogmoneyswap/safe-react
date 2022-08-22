@@ -146,7 +146,7 @@ function LoadSafeAddressStep(): ReactElement {
     <Container data-testid={'load-safe-address-step'}>
       <Block margin="md">
         <Paragraph color="primary" noMargin size="lg">
-          You are about to add an existing Smart Safe on <NetworkLabel />. First, choose a name and enter the Safe
+          You are about to add an existing Dog Safe on <NetworkLabel />. First, choose a name and enter the Safe
           address. The name is only stored locally and will never be shared with DogMoney or any third parties.
         </Paragraph>
         <Paragraph color="primary" size="lg">

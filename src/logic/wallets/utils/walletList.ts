@@ -34,7 +34,7 @@ const wallets = (chainId: ChainId): Wallet[] => {
     },
     {
       walletName: WALLETS.TREZOR,
-      appUrl: 'smartsafe.cash',
+      appUrl: 'safe.dogmoney.money',
       preferred: true,
       email: 'hello@smartsafe.cash',
       desktop: true,
@@ -51,13 +51,13 @@ const wallets = (chainId: ChainId): Wallet[] => {
       walletName: WALLETS.KEYSTONE,
       desktop: false,
       rpcUrl,
-      appName: 'Smart Safe',
+      appName: 'Dog Safe',
     },
     { walletName: WALLETS.TRUST, preferred: true, desktop: false },
     {
       walletName: WALLETS.LATTICE,
       rpcUrl,
-      appName: 'Smart Safe',
+      appName: 'Dog Safe',
       desktop: false,
     },
     {
