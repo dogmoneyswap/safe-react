@@ -1,13 +1,14 @@
 diff --git a/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js b/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
-index df8c3c3c..62daa1b5 100644
+index df8c3c3..1d97253 100644
 --- a/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
 +++ b/node_modules/bnc-onboard/dist/cjs/onboard-d16018d5.js
-@@ -1331,9 +1331,11 @@ function _getEns() {
+@@ -1331,9 +1331,12 @@ function _getEns() {
              _yield$Promise = _context13.sent;
              ENS = _yield$Promise["default"];
              getEnsAddress = _yield$Promise.getEnsAddress;
 +            const ensAddress = parseInt(networkId) === 10000 ? "0xCfb86556760d03942EBf1ba88a9870e67D77b627" :
-+              parseInt(networkId) === 10001 ? "0x32f1FBE59D771bdB7FB247FE97A635f50659202b" : getEnsAddress(networkId)
++              parseInt(networkId) === 10001 ? "0x32f1FBE59D771bdB7FB247FE97A635f50659202b" :
++              parseInt(networkId) === 2000 ? "0x834C46666c1dE7367B252682B9ABAb458DD333bf" : getEnsAddress(networkId)
              ens = new ENS({
                provider: provider,
 -              ensAddress: getEnsAddress(networkId)
@@ -15,7 +16,7 @@ index df8c3c3c..62daa1b5 100644
              });
              _context13.next = 10;
              return ens.getName(address);
-@@ -2536,7 +2538,7 @@ function initializeStores() {
+@@ -2536,7 +2539,7 @@ function initializeStores() {
    balance = get_store_value(app).dappId ? createBalanceStore(null) : createWalletStateSliceStore({
      parameter: 'balance',
      initialState: null,
@@ -25,15 +26,16 @@ index df8c3c3c..62daa1b5 100644
    wallet = writable({
      name: null,
 diff --git a/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js b/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
-index 92a3dc65..95c27fce 100644
+index 92a3dc6..f7a6917 100644
 --- a/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
 +++ b/node_modules/bnc-onboard/dist/esm/onboard-59ef9a1c.js
-@@ -1297,9 +1297,11 @@ function _getEns() {
+@@ -1297,9 +1297,12 @@ function _getEns() {
              _yield$import = _context13.sent;
              ENS = _yield$import["default"];
              getEnsAddress = _yield$import.getEnsAddress;
 +            const ensAddress = parseInt(networkId) === 10000 ? "0xCfb86556760d03942EBf1ba88a9870e67D77b627" :
-+              parseInt(networkId) === 10001 ? "0x32f1FBE59D771bdB7FB247FE97A635f50659202b" : getEnsAddress(networkId)
++              parseInt(networkId) === 10001 ? "0x32f1FBE59D771bdB7FB247FE97A635f50659202b" :
++              parseInt(networkId) === 2000 ? "0x834C46666c1dE7367B252682B9ABAb458DD333bf" : getEnsAddress(networkId)
              ens = new ENS({
                provider: provider,
 -              ensAddress: getEnsAddress(networkId)
@@ -41,7 +43,7 @@ index 92a3dc65..95c27fce 100644
              });
              _context13.next = 10;
              return ens.getName(address);
-@@ -2502,7 +2504,7 @@ function initializeStores() {
+@@ -2502,7 +2505,7 @@ function initializeStores() {
    balance = get_store_value(app).dappId ? createBalanceStore(null) : createWalletStateSliceStore({
      parameter: 'balance',
      initialState: null,

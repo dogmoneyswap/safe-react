@@ -1,8 +1,8 @@
 diff --git a/node_modules/web3-eth-ens/lib/config.js b/node_modules/web3-eth-ens/lib/config.js
-index 209ff5ab..e86f7a74 100644
+index 209ff5a..a1fd149 100644
 --- a/node_modules/web3-eth-ens/lib/config.js
 +++ b/node_modules/web3-eth-ens/lib/config.js
-@@ -28,7 +28,11 @@ var config = {
+@@ -28,7 +28,12 @@ var config = {
          main: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
          ropsten: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
          rinkeby: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
@@ -12,14 +12,15 @@ index 209ff5ab..e86f7a74 100644
 +        volta: "0xd7CeF70Ba7efc2035256d828d5287e2D285CD1ac",
 +        smartbch: "0xCfb86556760d03942EBf1ba88a9870e67D77b627",
 +        "smartbch-amber": "0x32f1FBE59D771bdB7FB247FE97A635f50659202b",
++        dogechain: "0x834C46666c1dE7367B252682B9ABAb458DD333bf",
      },
      // These ids obtained at ensdomains docs:
      // https://docs.ens.domains/contract-developer-guide/writing-a-resolver
 diff --git a/node_modules/web3-eth-ens/src/config.js b/node_modules/web3-eth-ens/src/config.js
-index b12e5f5b..130e08ce 100644
+index b12e5f5..ccf07c9 100644
 --- a/node_modules/web3-eth-ens/src/config.js
 +++ b/node_modules/web3-eth-ens/src/config.js
-@@ -30,7 +30,11 @@ var config = {
+@@ -30,7 +30,12 @@ var config = {
          main: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
          ropsten: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
          rinkeby: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
@@ -29,6 +30,7 @@ index b12e5f5b..130e08ce 100644
 +        volta: "0xd7CeF70Ba7efc2035256d828d5287e2D285CD1ac",
 +        smartbch: "0xCfb86556760d03942EBf1ba88a9870e67D77b627",
 +        "smartbch-amber": "0x32f1FBE59D771bdB7FB247FE97A635f50659202b",
++        dogechain: "0x834C46666c1dE7367B252682B9ABAb458DD333bf",
      },
      // These ids obtained at ensdomains docs:
      // https://docs.ens.domains/contract-developer-guide/writing-a-resolver
