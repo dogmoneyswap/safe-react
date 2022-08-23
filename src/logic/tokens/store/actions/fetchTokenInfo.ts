@@ -27,7 +27,7 @@ export const getTokenInfo = async (address: string): Promise<TokenInfo> => {
       decimals: parseInt(result[0]),
       name: result[1],
       symbol: result[2],
-      logoUri: `https://assets.safe.dogmoney.money/tokens/logos/${address}.png`,
+      logoUri: `https://assets-dogechain.smartsafe.cash/tokens/logos/${address}.png`,
     } as TokenInfo
     tokenInfoCache[address] = tokenInfo
   }
