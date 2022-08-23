@@ -104,7 +104,7 @@ const Layout = ({ classes, providerDetails, providerInfo }) => {
         <Track {...OVERVIEW_EVENTS.HOME}>
           <Link to={ROOT_ROUTE}>
             <Img
-              alt="Dog Safe"
+              alt="Doge Safe"
               height={36}
               src={isMobile ? SafeLogoMobile : SafeLogo}
               testId="heading-gnosis-logo"

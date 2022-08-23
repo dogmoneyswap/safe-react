@@ -104,7 +104,7 @@ const getOnboard = (chainId: ChainId): API => {
         : undefined,
     },
     walletSelect: {
-      description: 'Please select a wallet to connect to Dog Safe',
+      description: 'Please select a wallet to connect to Doge Safe',
       wallets: isCypressAskingForConnectedState() ? [customSDKWallet] : getSupportedWallets(chainId),
     },
     walletCheck: [
