@@ -9,7 +9,7 @@ export const getChains = (): ChainInfo[] => chains
 
 export const loadChains = async () => {
   const { results = [] } = await getChainsConfig(GATEWAY_URL)
-  chains = results
+  chains = results.filter((chain) => ['2000', '568'].includes(chain.chainId))
   // Set the initail web3 provider after loading chains
   setWeb3ReadOnly()
 }

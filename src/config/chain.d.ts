@@ -16,6 +16,7 @@ export const CHAIN_ID: Record<ChainName, ChainId> = {
   SMARTBCH: '10000',
   SMARTBCH_AMBER: '10001',
   DOGECHAIN: '2000',
+  DOGECHAIN_TESTNET: '568',
 }
 
 // Values match that required of onboard and returned by CGW

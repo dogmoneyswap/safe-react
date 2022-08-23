@@ -147,6 +147,7 @@ export const getAvatarFromENS = (name: string): string => {
     10000: 'https://metadata.bch.domains/smartbch',
     10001: 'https://metadata.bch.domains/smartbch-amber',
     2000: 'https://metadata.bch.domains/dogechain',
+    568: 'https://metadata.bch.domains/dogechain-testnet',
   }
   return name?.length ? `${LNS_METADATA_URL[parseInt(_getChainId())]}/avatar/${name}` : ''
 }

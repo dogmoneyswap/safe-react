@@ -1874,7 +1874,7 @@
 
 "@gnosis.pm/safe-deployments@git+https://github.com/mistswapdex/safe-deployments#dist":
   version "1.14.0"
-  resolved "git+https://github.com/mistswapdex/safe-deployments#abd422480e84412cad907bd9811007ce167bbce4"
+  resolved "git+https://github.com/mistswapdex/safe-deployments#cf2cc9a8898039b24b4bdfc7bef15f63bb90d065"
 
 "@gnosis.pm/safe-modules-deployments@^1.0.0":
   version "1.0.0"
