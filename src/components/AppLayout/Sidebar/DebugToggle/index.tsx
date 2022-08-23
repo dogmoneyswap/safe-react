@@ -22,7 +22,7 @@ const DebugToggle = (): React.ReactElement => {
 
   return (
     <StyledContainer>
-      <FormControlLabel control={<Switch checked={enabled} onChange={onToggle} />} label="Use prod CGW" />
+      {false && <FormControlLabel control={<Switch checked={enabled} onChange={onToggle} />} label="Use prod CGW" />}
     </StyledContainer>
   )
 }

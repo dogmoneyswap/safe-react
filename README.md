@@ -1,12 +1,12 @@
 # Smart Safe
 
-![license](https://img.shields.io/github/license/mistswapdex/safe-react)
+![license](https://img.shields.io/github/license/dogmoneyswap/safe-react)
 
 The most trusted platform to store digital assets on smartBCH. More info at [smartsafe.cash](https://smartsafe.cash/). Built on top of [Gnosis Safe](https://gnosis-safe.io).
 
 For technical information please refer to the [Gnosis Developer Portal](https://docs.gnosis.io/safe/).
 
-For support requests, please open up a [bug issue](https://github.com/mistswapdex/safe-react/issues/new?template=bug-report.md) or reach out via [Discord](https://discord.gg/mistswapdex).
+For support requests, please open up a [bug issue](https://github.com/dogmoneyswap/safe-react/issues/new?template=bug-report.md) or reach out via [Discord](https://discord.gg/KsdYjQ2P).
 
 ## Transactions
 
@@ -20,7 +20,7 @@ Please see the [transaction](docs/transactions.md) notes for more information ab
 
 ## Deployed environments
 
-- Production: https://smartsafe.cash | https://safe.mistswap.fi
+- Production: https://dogesafe.cash | https://safe.dogmoney.money
 
 ## Getting Started
 

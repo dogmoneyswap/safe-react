@@ -1,18 +1,14 @@
 diff --git a/node_modules/web3-eth/lib/getNetworkType.js b/node_modules/web3-eth/lib/getNetworkType.js
-index f8d77bc..c78605b 100644
+index f8d77bcf..d5334115 100644
 --- a/node_modules/web3-eth/lib/getNetworkType.js
 +++ b/node_modules/web3-eth/lib/getNetworkType.js
-@@ -53,6 +53,26 @@ var getNetworkType = function (callback) {
+@@ -53,6 +53,28 @@ var getNetworkType = function (callback) {
              id === 42) {
              returnValue = 'kovan';
          }
 +        if (genesis.hash === '0x0b6d3e680af2fc525392c720666cce58e3d8e6fe75ba4b48cb36bcc69039229b' &&
 +            id === 246) {
 +            returnValue = 'energyWebChain';
-+        }
-+        if (genesis.hash === '0x5ee4e79b3d798f8bd5a3a5f92e24f62198888aed028354ad5463aea8e5da5b74' &&
-+            id === 2000) {
-+            returnValue = 'smartbch';
 +        }
 +        if (genesis.hash === '0xebd8b413ca7b7f84a8dd20d17519ce2b01954c74d94a0a739a3e416abe0e43e5' &&
 +            id === 73799) {
@@ -26,24 +22,26 @@ index f8d77bc..c78605b 100644
 +            id === 10001) {
 +            returnValue = 'smartbch-amber';
 +        }
++        if (id === 2000) {
++            returnValue = 'dogechain';
++        }
++        if (id === 568) {
++            returnValue = "dogechain-testnet";
++        }
          if (typeof callback === 'function') {
              callback(null, returnValue);
          }
 diff --git a/node_modules/web3-eth/src/getNetworkType.js b/node_modules/web3-eth/src/getNetworkType.js
-index 5f9b9b3..b0b69e4 100644
+index 5f9b9b31..2b88631e 100644
 --- a/node_modules/web3-eth/src/getNetworkType.js
 +++ b/node_modules/web3-eth/src/getNetworkType.js
-@@ -61,6 +61,26 @@ var getNetworkType = function (callback) {
+@@ -61,6 +61,28 @@ var getNetworkType = function (callback) {
                  id === 42) {
                  returnValue = 'kovan';
              }
 +            if (genesis.hash === '0x0b6d3e680af2fc525392c720666cce58e3d8e6fe75ba4b48cb36bcc69039229b' &&
 +              id === 246) {
 +                returnValue = 'energyWebChain';
-+            }
-+            if (genesis.hash === '0x5ee4e79b3d798f8bd5a3a5f92e24f62198888aed028354ad5463aea8e5da5b74' &&
-+              id === 2000) {
-+                returnValue = 'dogechain';
 +            }
 +            if (genesis.hash === '0xebd8b413ca7b7f84a8dd20d17519ce2b01954c74d94a0a739a3e416abe0e43e5' &&
 +              id === 73799) {
@@ -56,6 +54,12 @@ index 5f9b9b3..b0b69e4 100644
 +            if (genesis.hash === '0x0000000000000000000000000000000000000000000000000000000000000000' &&
 +              id === 10001) {
 +                returnValue = 'smartbch-amber';
++            }
++            if (id === 2000) {
++                returnValue = 'dogechain';
++            }
++            if (id === 568) {
++                returnValue = "dogechain-testnet";
 +            }
  
              if (typeof callback === 'function') {
