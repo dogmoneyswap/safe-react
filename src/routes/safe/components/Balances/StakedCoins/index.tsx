@@ -99,11 +99,13 @@ const Coins = (props: Props): React.ReactElement => {
   const columns = isMobile ? generateMobileColumns() : generateColumns()
   const autoColumns = columns.filter((c) => !c.custom)
   const selectedCurrency = useSelector(currentCurrencySelector)
+
   const safeTokens = useMasterChefStakedTokens({
     masterChefAddress,
     sushiTokenAddress: '0x93C8a00416dD8AB9701fa15CA120160172039851',
     xSushiTokenAddress: '0xC5c70fA7A518bE9229eB0Dc84e70a91683694562',
   })
+
   const differingTokens = useMemo(() => safeTokens.size, [safeTokens])
   useEffect(() => {
     // Safe does not have any tokens until fetching is complete
@@ -116,7 +118,7 @@ const Coins = (props: Props): React.ReactElement => {
     if (token.isLpToken) {
       history.push(getSafeAppUrl('https://app.dogmoney.money/farm?filter=portfolio', routeParams))
     } else {
-      history.push(getSafeAppUrl('https://app.dogmoney.moneu/stake', routeParams))
+      history.push(getSafeAppUrl('https://app.dogmoney.money/stake', routeParams))
     }
   }
 
